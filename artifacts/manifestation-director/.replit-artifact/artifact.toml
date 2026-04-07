@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "顯化導演系統"
+version = "1.0.0"
+id = "artifacts/manifestation-director"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25122
+
+[services.development]
+run = "pnpm --filter @workspace/manifestation-director run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/manifestation-director", "run", "build" ]
+publicDir = "artifacts/manifestation-director/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25122"
+BASE_PATH = "/"
