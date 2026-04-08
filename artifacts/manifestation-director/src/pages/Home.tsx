@@ -53,6 +53,18 @@ export default function Home() {
                 </p>
               </div>
             </FadeIn>
+            <FadeIn delay={0.8}>
+              <div className="text-center mt-10">
+                <a
+                  href="https://forms.gle/LEXcQ5wtHkaXbCqL9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-10 py-4 bg-primary text-primary-foreground font-bold text-lg rounded-full hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(230,175,50,0.3)] hover:shadow-[0_0_50px_rgba(230,175,50,0.5)]"
+                >
+                  「開始你的轉變之旅」→
+                </a>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
