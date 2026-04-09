@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import jungImg from "@assets/image_1775718771895.png";
 
 const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
   <motion.div
@@ -73,8 +74,15 @@ export default function Home() {
       <section className="py-24 md:py-32 px-6 relative z-10 bg-card/50">
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <FadeIn>
-            <div className="inline-block mb-8">
-              <div className="h-12 w-[1px] bg-primary/30 mx-auto" />
+            <div className="flex flex-col items-center gap-6 mb-8">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_30px_rgba(230,175,50,0.2)]">
+                <img
+                  src={jungImg}
+                  alt="Carl Jung"
+                  className="w-full h-full object-cover object-top grayscale opacity-80"
+                />
+              </div>
+              <div className="h-10 w-[1px] bg-primary/30" />
             </div>
             <blockquote className="text-2xl md:text-4xl font-serif leading-relaxed italic text-primary/90">
               「當我們不理解潛意識時，我們以為自己活在命運裡；<br className="hidden md:block" />
