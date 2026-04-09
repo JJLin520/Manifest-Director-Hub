@@ -21,7 +21,6 @@ export default function Home() {
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[150px]" />
       </div>
-
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 pb-32 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -69,7 +68,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Jung Quote */}
       <section className="py-24 md:py-32 px-6 relative z-10 bg-card/50">
         <div className="max-w-4xl mx-auto text-center space-y-12">
@@ -99,7 +97,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* Founder Story */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
@@ -110,9 +107,7 @@ export default function Home() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="space-y-6 text-lg md:text-xl leading-loose text-muted-foreground">
-              <p>
-                那一年，我創業後來失敗搞到負債。不是電影裡帥氣的那種破釜沉舟——是深夜盯著帳單、不敢接電話、不知道明天怎麼辦的真實窒息感。
-              </p>
+              <p>那一年，我創業失敗搞到負債。不是電影裡帥氣的那種破釜沉舟——是深夜盯著帳單、不敢接電話、不知道明天怎麼辦的真實窒息感。</p>
               <p>
                 我開始覺得，這條路走不出去了，進入了憂鬱症的狀態。
               </p>
@@ -126,7 +121,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* Pain Points */}
       <section className="py-24 md:py-32 px-6 relative z-10 bg-card/30">
         <div className="max-w-5xl mx-auto">
@@ -163,7 +157,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* What is System */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-4xl mx-auto space-y-12">
@@ -191,7 +184,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* 8 Steps */}
       <section className="py-24 md:py-32 px-6 relative z-10 bg-card/30">
         <div className="max-w-4xl mx-auto">
@@ -226,7 +218,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* 6 Modules */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
@@ -259,7 +250,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Testimonial */}
       <section className="py-24 md:py-32 px-6 relative z-10 bg-card/30">
         <div className="max-w-3xl mx-auto">
@@ -294,7 +284,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Pricing */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
@@ -354,7 +343,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* CTA */}
       <section className="py-32 md:py-48 px-6 relative z-10 overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 rounded-[100%] blur-[100px] scale-150" />
@@ -387,7 +375,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       <footer className="py-8 text-center text-muted-foreground/50 text-sm border-t border-primary/10 relative z-10">
         © 2024 宇宙序能教育品牌 ｜ JJ 林炳騰
       </footer>
