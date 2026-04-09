@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import jungImg from "@assets/image_1775718771895.png";
+import jungImg from "@assets/image_1775719326096.png";
 
 const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
   <motion.div
