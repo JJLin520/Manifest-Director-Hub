@@ -270,35 +270,6 @@ export default function Home() {
               </p>
             </div>
           </FadeIn>
-
-          {/* 6 Modules */}
-          <FadeIn delay={0.1}>
-            <div className="text-center mb-10">
-              <p className="text-xs tracking-widest text-primary/60 uppercase mb-2">覆蓋範圍</p>
-              <h3 className="text-2xl md:text-3xl font-serif font-bold">六大命運模組，全面重編</h3>
-            </div>
-          </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "財富", before: "我命中缺財", after: "我天生招財" },
-              { title: "事業", before: "我註定平凡", after: "我註定成功" },
-              { title: "關係", before: "我不值得被愛", after: "我值得被深愛" },
-              { title: "身心", before: "我體質不好", after: "我天生健康" },
-              { title: "情緒", before: "我天生悲觀", after: "我天生樂觀" },
-              { title: "靈性", before: "我命苦，改不了", after: "我是自己命運的源頭" },
-            ].map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.08}>
-                <div className="p-7 border border-primary/20 rounded-2xl bg-card/50 text-center space-y-5 hover:border-primary/50 transition-colors">
-                  <h3 className="text-xl font-serif font-bold text-primary">{item.title}</h3>
-                  <div className="space-y-3">
-                    <p className="text-muted-foreground line-through decoration-primary/30 text-sm">「{item.before}」</p>
-                    <div className="text-primary/40 text-xs">↓</div>
-                    <p className="font-semibold text-foreground">「{item.after}」</p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
         </div>
       </section>
 
