@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Users, ClipboardList, Menu, X } from "lucide-react";
+import { LayoutDashboard, Users, ClipboardList, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { logout } from "@/lib/auth";
 
 const nav = [
   { href: "/", icon: LayoutDashboard, label: "總覽" },
@@ -8,9 +9,20 @@ const nav = [
   { href: "/contacts", icon: Users, label: "客戶管理" },
 ];
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+  onLogout,
+}: {
+  children: React.ReactNode;
+  onLogout: () => void;
+}) {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
+
+  async function handleLogout() {
+    await logout();
+    onLogout();
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -57,8 +69,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        <div className="px-6 py-4 border-t border-sidebar-border">
-          <p className="text-xs text-muted-foreground">Coach JJ 林炳騰</p>
+        <div className="px-3 py-4 border-t border-sidebar-border space-y-3">
+          <p className="text-xs text-muted-foreground px-3">Coach JJ 林炳騰</p>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-md text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent hover:text-accent-foreground transition-colors"
+          >
+            <LogOut size={18} />
+            登出
+          </button>
         </div>
       </aside>
 
