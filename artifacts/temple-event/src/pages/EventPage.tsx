@@ -110,8 +110,15 @@ export default function EventPage() {
             <p>期待在 <strong className="text-foreground">5/3 (日) 下午 2 點</strong>與您在雲陽寺相聚，<br />共度平靜溫馨的午後時光。</p>
             <p className="text-sm">如有任何問題，歡迎隨時與我們聯繫。</p>
           </div>
-          <div className="pt-4 text-sm text-muted-foreground border-t border-border pt-6">
-            新店雲陽寺｜新北市新店區銀河路23號
+          <div className="pt-6 border-t border-border space-y-4">
+            <p className="text-sm text-muted-foreground">新店雲陽寺｜新北市新店區銀河路23號</p>
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/10 transition-colors"
+            >
+              <span className="text-base">✦</span>
+              回到宇宙序能
+            </a>
           </div>
         </div>
       </div>
