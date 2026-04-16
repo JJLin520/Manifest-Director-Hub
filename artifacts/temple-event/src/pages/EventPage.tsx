@@ -9,7 +9,6 @@ type FormData = {
   attendees: string;
   hasLantern: string;
   prayerNames: string;
-  dietaryNeeds: string;
   referralSource: string[];
 };
 
@@ -20,7 +19,6 @@ const initialForm: FormData = {
   attendees: "1",
   hasLantern: "",
   prayerNames: "",
-  dietaryNeeds: "",
   referralSource: [],
 };
 
@@ -86,9 +84,10 @@ export default function EventPage() {
     }
 
     try {
+      const { referralSource, ...rest } = form;
       const payload = {
-        ...form,
-        referralSource: form.referralSource.join("、"),
+        ...rest,
+        referralSource: referralSource.join("、"),
         submittedAt: new Date().toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }),
       };
 
@@ -292,18 +291,6 @@ export default function EventPage() {
                 rows={3}
                 placeholder="例：媽媽 王美玲、外婆 陳秀蘭"
                 className={`${inputClass} resize-none`}
-              />
-            </Field>
-
-            {/* 7. 飲食 */}
-            <Field label="飲食習慣或特殊需求" hint="現場將備有茶水與簡單茶食，若有全素或其他飲食禁忌，請先告知（選填）。">
-              <input
-                type="text"
-                name="dietaryNeeds"
-                value={form.dietaryNeeds}
-                onChange={handleChange}
-                placeholder="例：全素、無麩質、對堅果過敏……"
-                className={inputClass}
               />
             </Field>
 
