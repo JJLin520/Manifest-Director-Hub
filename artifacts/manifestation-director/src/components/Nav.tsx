@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 
 const links = [
-  { href: "/course", label: "課程報名" },
   { href: "/services", label: "服務介紹" },
   { href: "/events", label: "講座活動" },
   { href: "/about", label: "關於我們" },
