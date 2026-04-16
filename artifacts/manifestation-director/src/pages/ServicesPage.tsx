@@ -185,6 +185,11 @@ export default function ServicesPage() {
               我幫你設計你要去哪裡，然後陪你走過去。
             </p>
           </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="text-primary font-serif font-semibold text-xl md:text-2xl tracking-wide">
+              不只療癒過去，更要顯化未來
+            </p>
+          </FadeIn>
           <FadeIn delay={0.2}>
             <BookBtn />
           </FadeIn>
