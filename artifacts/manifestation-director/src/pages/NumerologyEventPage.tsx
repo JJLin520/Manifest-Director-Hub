@@ -42,7 +42,7 @@ const learns = [
 export default function NumerologyEventPage() {
   const [session, setSession] = useState<Session | null>(null);
   const [loadError, setLoadError] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", lineId: "", referralSource: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", lineId: "", referralSource: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -243,6 +243,11 @@ export default function NumerologyEventPage() {
                   感謝你的報名，JJ 老師將在講座開始前
                   <br />透過 LINE 傳送直播連結給你。
                 </p>
+                {form.email && (
+                  <p className="text-[#c9a84c]/80 text-xs mt-3 bg-[#c9a84c]/8 border border-[#c9a84c]/20 rounded-lg px-4 py-2">
+                    📧 報名確認信已寄至 {form.email}
+                  </p>
+                )}
                 <p className="text-white/40 text-xs mt-4">若有任何問題，請加 LINE：@jjloveyou520</p>
               </motion.div>
             ) : (
@@ -282,6 +287,19 @@ export default function NumerologyEventPage() {
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                     className="w-full bg-white/6 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-[#c9a84c]/60 transition-colors"
                     required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm text-white/70 mb-1.5">
+                    Email <span className="text-white/40 text-xs font-normal">（選填，填寫後將收到報名確認信）</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    className="w-full bg-white/6 border border-white/15 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm outline-none focus:border-[#c9a84c]/60 transition-colors"
                   />
                 </div>
 

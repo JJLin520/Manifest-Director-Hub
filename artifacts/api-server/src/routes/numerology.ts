@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { db, contactsTable, numerologySessionsTable, numerologyRegistrationsTable } from "@workspace/db";
 import { eq, desc } from "drizzle-orm";
+import { sendEmail, buildLectureConfirmationEmail } from "../lib/resend";
 
 const router = Router();
 
@@ -24,7 +25,7 @@ router.get("/numerology/current-session", async (_req, res) => {
 // POST /api/numerology/register — register for the active session (public)
 router.post("/numerology/register", async (req, res) => {
   try {
-    const { name, phone, lineId, lifeNumber, referralSource } = req.body;
+    const { name, phone, email, lineId, lifeNumber, referralSource } = req.body;
 
     if (!name || !phone) {
       return res.status(400).json({ error: "姓名和手機為必填" });
@@ -54,12 +55,17 @@ router.post("/numerology/register", async (req, res) => {
       contactId = existing[0].id;
       await db
         .update(contactsTable)
-        .set({ name, ...(lineId ? { lineId } : {}), updatedAt: new Date() })
+        .set({
+          name,
+          ...(lineId ? { lineId } : {}),
+          ...(email ? { email } : {}),
+          updatedAt: new Date(),
+        })
         .where(eq(contactsTable.id, contactId));
     } else {
       const [inserted] = await db
         .insert(contactsTable)
-        .values({ name, phone, lineId: lineId || null })
+        .values({ name, phone, lineId: lineId || null, email: email || null })
         .returning({ id: contactsTable.id });
       contactId = inserted.id;
     }
@@ -69,6 +75,17 @@ router.post("/numerology/register", async (req, res) => {
       .insert(numerologyRegistrationsTable)
       .values({ contactId, sessionId: session.id, lifeNumber: lifeNumber || null, referralSource: referralSource || null })
       .returning();
+
+    // Send confirmation email (non-blocking)
+    if (email) {
+      const { subject, html } = buildLectureConfirmationEmail({
+        name,
+        sessionNumber: session.sessionNumber,
+        sessionDate: new Date(session.sessionDate),
+        sessionTitle: session.title,
+      });
+      sendEmail(email, subject, html);
+    }
 
     return res.status(201).json({ success: true, registrationId: registration.id, sessionId: session.id });
   } catch (err) {

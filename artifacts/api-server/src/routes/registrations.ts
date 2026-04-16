@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { db, contactsTable, registrationsTable } from "@workspace/db";
 import { eq, desc } from "drizzle-orm";
+import { sendEmail, buildRegistrationConfirmationEmail } from "../lib/resend";
 
 const router = Router();
 
 // POST /api/registrations — submit a new event registration (public)
 router.post("/registrations", async (req, res) => {
   try {
-    const { name, phone, lineId, attendees, hasLantern, referralSource, eventName } = req.body;
+    const { name, phone, email, lineId, attendees, hasLantern, referralSource, eventName } = req.body;
 
     if (!name || !phone || !eventName) {
       return res.status(400).json({ error: "name, phone, and eventName are required" });
@@ -24,19 +25,19 @@ router.post("/registrations", async (req, res) => {
 
     if (existing.length > 0) {
       contactId = existing[0].id;
-      // Update name/lineId if provided
       await db
         .update(contactsTable)
         .set({
           name,
           ...(lineId ? { lineId } : {}),
+          ...(email ? { email } : {}),
           updatedAt: new Date(),
         })
         .where(eq(contactsTable.id, contactId));
     } else {
       const inserted = await db
         .insert(contactsTable)
-        .values({ name, phone, lineId: lineId || null })
+        .values({ name, phone, lineId: lineId || null, email: email || null })
         .returning({ id: contactsTable.id });
       contactId = inserted[0].id;
     }
@@ -52,6 +53,12 @@ router.post("/registrations", async (req, res) => {
         referralSource: referralSource || null,
       })
       .returning();
+
+    // Send confirmation email (non-blocking)
+    if (email) {
+      const { subject, html } = buildRegistrationConfirmationEmail({ name, eventName, attendees });
+      sendEmail(email, subject, html);
+    }
 
     return res.status(201).json({ success: true, registrationId: registration.id, contactId });
   } catch (err) {
