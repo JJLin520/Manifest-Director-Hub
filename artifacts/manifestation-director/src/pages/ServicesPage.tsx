@@ -242,7 +242,16 @@ export default function ServicesPage() {
                 <span className="text-2xl block mb-2">{p.emoji}</span>
                 <p className="font-serif font-bold text-sm text-foreground leading-tight">{p.title}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">{p.duration}</p>
-                <p className={`text-sm font-bold mt-1.5 ${p.highlight ? "text-primary" : p.accent}`}>{p.price}</p>
+                {p.originalPrice ? (
+                  <div className="mt-1.5 space-y-0.5">
+                    <p className="text-sm text-muted-foreground line-through">{p.originalPrice}</p>
+                    <p className={`text-sm font-bold ${p.accent}`}>
+                      {p.price} <span className="text-xs font-normal">初體驗</span>
+                    </p>
+                  </div>
+                ) : (
+                  <p className={`text-sm font-bold mt-1.5 ${p.highlight ? "text-primary" : p.accent}`}>{p.price}</p>
+                )}
                 <span className={`inline-block mt-2 px-2 py-0.5 text-xs font-bold rounded-full ${
                   p.highlight ? "bg-primary text-primary-foreground" : "bg-white/10 text-foreground/70"
                 }`}>
@@ -279,13 +288,23 @@ export default function ServicesPage() {
                     }`}>{p.tag}</span>
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5">{p.subtitle}</p>
-                  <div className="flex items-baseline gap-2 mt-1">
-                    <span className={`text-lg font-bold ${p.highlight ? "text-primary" : p.accent}`}>{p.price}</span>
-                    {p.originalPrice && (
-                      <span className="text-xs text-muted-foreground line-through">{p.originalPrice}</span>
-                    )}
-                    <span className="text-xs text-muted-foreground">／{p.duration}</span>
-                  </div>
+                  {p.originalPrice ? (
+                    <div className="mt-1">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-base text-muted-foreground line-through">{p.originalPrice}</span>
+                        <span className="text-xs text-muted-foreground">／{p.duration}</span>
+                      </div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className={`text-lg font-bold ${p.accent}`}>{p.price}</span>
+                        <span className="text-xs text-primary font-semibold">初體驗優惠</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className={`text-lg font-bold ${p.highlight ? "text-primary" : p.accent}`}>{p.price}</span>
+                      <span className="text-xs text-muted-foreground">／{p.duration}</span>
+                    </div>
+                  )}
                 </div>
                 <motion.span
                   animate={{ rotate: expanded === p.id ? 180 : 0 }}
