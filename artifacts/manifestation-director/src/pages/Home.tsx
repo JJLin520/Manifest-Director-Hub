@@ -186,9 +186,6 @@ export default function Home() {
           <FadeIn delay={0.45}>
             <div className="mt-12 flex flex-col items-center gap-6 text-center">
               <CTAButton />
-              <p className="text-sm text-muted-foreground/60 italic border-l-2 border-primary/20 pl-4 text-left max-w-lg">
-                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
-              </p>
             </div>
           </FadeIn>
         </div>
