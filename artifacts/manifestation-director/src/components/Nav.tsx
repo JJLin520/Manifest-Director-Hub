@@ -45,14 +45,12 @@ export default function Nav() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href="https://forms.gle/LEXcQ5wtHkaXbCqL9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2 bg-primary text-primary-foreground text-sm font-bold rounded-full hover:bg-primary/90 transition-all duration-200"
+            <Link
+              href="/course"
+              className={`px-5 py-2 bg-primary text-primary-foreground text-sm font-bold rounded-full hover:bg-primary/90 transition-all duration-200 ${location.startsWith("/course") ? "opacity-90" : ""}`}
             >
-              立即報名
-            </a>
+              顯化導演介紹
+            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -84,15 +82,13 @@ export default function Nav() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href="https://forms.gle/LEXcQ5wtHkaXbCqL9"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/course"
               onClick={() => setOpen(false)}
               className="block text-center px-5 py-3 bg-primary text-primary-foreground text-sm font-bold rounded-full hover:bg-primary/90 transition-all mt-4"
             >
-              立即報名
-            </a>
+              顯化導演介紹
+            </Link>
           </div>
         )}
       </nav>
