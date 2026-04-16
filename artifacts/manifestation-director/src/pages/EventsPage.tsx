@@ -49,6 +49,35 @@ const otherEvents = [
     href: "/temple-event/",
     cta: "立即報名",
     external: false,
+    badges: ["實體活動"],
+  },
+  {
+    day: "TBA",
+    month: "近期",
+    tag: "線上講座",
+    highlight: false,
+    title: "NLP 顯化人生｜定期講座",
+    location: "線上 Zoom（報名後傳送連結）",
+    fee: "免費",
+    desc: "你的大腦是一台最強大的「現實列印機」——但大多數人的引擎，搜尋的都是壓力與不可能。這場講座教你掌握開關，透過 NLP 實作技巧調整內在語言，讓外在世界自動對齊你的頻率。",
+    href: "https://lin.ee/Nq1MhuY",
+    cta: "加 LINE 報名",
+    external: true,
+    badges: ["免費", "NLP"],
+  },
+  {
+    day: "TBA",
+    month: "近期",
+    tag: "工作坊",
+    highlight: false,
+    title: "NLP 奧密時間線工作坊",
+    location: "台北場（地點確認中）",
+    fee: "詢問報名",
+    desc: "為什麼有些人總是重複相同的困境？答案藏在你的「潛意識時間線」裡。這場工作坊帶你回溯卡住你的關鍵事件，重寫生命腳本，從根本修改人生劇情。",
+    href: "https://lin.ee/Nq1MhuY",
+    cta: "加 LINE 詢問",
+    external: true,
+    badges: ["NLP", "深度工作坊"],
   },
   {
     day: "TBA",
@@ -62,6 +91,7 @@ const otherEvents = [
     href: "https://lin.ee/Nq1MhuY",
     cta: "加 LINE 搶先通知",
     external: true,
+    badges: ["免費"],
   },
   {
     day: "TBA",
@@ -71,10 +101,11 @@ const otherEvents = [
     title: "情緒釋放 & 心錨建立工作坊",
     location: "台北場（地點確認中）",
     fee: "NT$1,500",
-    desc: "半天深度工作坊，學習用 NLP 技術快速釋放情緒卡點，建立自己專屬的「巔峰狀態心錨」。",
+    desc: "半天深度工作坊，學習用 NLP 技術快速釋放情緒卡點，建立自己專屬的「巔峰狀態心錨」，讓你隨時切換到最佳狀態。",
     href: "https://lin.ee/Nq1MhuY",
     cta: "加 LINE 搶先通知",
     external: true,
+    badges: ["NLP"],
   },
 ];
 
@@ -332,7 +363,10 @@ export default function EventsPage() {
               <div className="flex-1 space-y-3">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs px-2 py-0.5 border border-primary/30 text-primary/80 rounded-full">{ev.tag}</span>
-                  <span className="text-xs text-muted-foreground">{ev.fee}</span>
+                  {ev.badges?.map(b => (
+                    <span key={b} className="text-xs px-2 py-0.5 bg-primary/10 text-primary/70 rounded-full">{b}</span>
+                  ))}
+                  <span className="text-xs text-muted-foreground ml-auto">{ev.fee}</span>
                 </div>
                 <h3 className="text-lg font-serif font-bold">{ev.title}</h3>
                 <p className="text-xs text-muted-foreground flex items-center gap-1"><MapPin size={11} /> {ev.location}</p>
