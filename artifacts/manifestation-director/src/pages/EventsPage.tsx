@@ -22,6 +22,7 @@ interface Session {
   sessionDate: string;
   title: string;
   description: string | null;
+  isActive: boolean;
 }
 
 function formatDate(iso: string) {
@@ -77,12 +78,13 @@ const otherEvents = [
   },
 ];
 
-function NumerologyRegForm({ session, onClose }: { session: Session; onClose?: () => void }) {
-  const formatted = formatDate(session.sessionDate);
+function NumerologyRegForm({ sessions, onClose }: { sessions: Session[]; onClose?: () => void }) {
+  const [selectedId, setSelectedId] = useState<number>(sessions[0]?.id ?? 0);
   const [form, setForm] = useState({ name: "", phone: "", email: "", lineId: "", referralSource: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const selected = sessions.find(s => s.id === selectedId);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -93,7 +95,7 @@ function NumerologyRegForm({ session, onClose }: { session: Session; onClose?: (
       const res = await fetch(`${API}/api/numerology/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, sessionId: selectedId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "報名失敗");
@@ -110,23 +112,36 @@ function NumerologyRegForm({ session, onClose }: { session: Session; onClose?: (
       <div className="text-center py-6">
         <CheckCircle className="text-primary mx-auto mb-3" size={36} />
         <p className="font-serif font-bold text-lg mb-1">報名成功！</p>
+        {selected && (
+          <p className="text-primary text-sm font-medium mb-1">
+            第 {selected.sessionNumber} 場 · {formatDate(selected.sessionDate).date}
+          </p>
+        )}
         <p className="text-muted-foreground text-sm">直播連結將在講座前透過 LINE 傳送給你。</p>
-        {form.email && (
-          <p className="text-primary/70 text-xs mt-2">📧 確認信已寄至 {form.email}</p>
-        )}
-        {onClose && (
-          <button onClick={onClose} className="mt-4 text-xs text-muted-foreground underline">關閉</button>
-        )}
+        {form.email && <p className="text-primary/70 text-xs mt-2">📧 確認信已寄至 {form.email}</p>}
+        {onClose && <button onClick={onClose} className="mt-4 text-xs text-muted-foreground underline">關閉</button>}
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center gap-3 text-sm text-muted-foreground bg-primary/8 border border-primary/20 rounded-lg px-4 py-3">
-        <Calendar size={14} className="text-primary shrink-0" />
-        <span>{formatted.date}，{formatted.time} 開始</span>
-        <span className="ml-auto text-xs bg-primary/15 text-primary px-2 py-0.5 rounded-full">第 {session.sessionNumber} 場</span>
+      {/* Session picker */}
+      <div>
+        <p className="text-xs text-muted-foreground mb-2">選擇場次</p>
+        <div className="flex flex-wrap gap-2">
+          {sessions.map(s => {
+            const f = formatDate(s.sessionDate);
+            const isSel = selectedId === s.id;
+            return (
+              <button type="button" key={s.id} onClick={() => setSelectedId(s.id)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm transition-all ${isSel ? "border-primary bg-primary/10 text-primary font-semibold" : "border-primary/20 text-muted-foreground hover:border-primary/40"}`}>
+                <Calendar size={12} className={isSel ? "text-primary" : "text-muted-foreground"} />
+                {f.date} {f.time}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
@@ -176,18 +191,16 @@ function NumerologyRegForm({ session, onClose }: { session: Session; onClose?: (
 }
 
 export default function EventsPage() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [sessions, setSessions] = useState<Session[]>([]);
   const [sessionError, setSessionError] = useState(false);
   const [regOpen, setRegOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`${API}/api/numerology/current-session`)
+    fetch(`${API}/api/numerology/sessions`)
       .then(r => r.ok ? r.json() : Promise.reject())
-      .then(setSession)
+      .then(setSessions)
       .catch(() => setSessionError(true));
   }, []);
-
-  const formatted = session ? formatDate(session.sessionDate) : null;
 
   return (
     <div className="bg-background text-foreground font-sans min-h-screen pt-16">
@@ -218,21 +231,11 @@ export default function EventsPage() {
         {/* ── 數字講座 Featured Card ── */}
         <FadeIn>
           <div className="rounded-2xl border border-primary/50 bg-gradient-to-br from-primary/12 to-primary/4 overflow-hidden">
-            {/* Card Header */}
             <div className="flex flex-col md:flex-row gap-5 p-7">
               {/* Date badge */}
               <div className="flex-shrink-0 text-center min-w-[64px]">
-                {session ? (
-                  <>
-                    <p className="text-3xl font-serif font-bold text-primary">{formatted?.day}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{formatted?.month}</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="text-2xl font-serif font-bold text-primary">每月</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">定期</p>
-                  </>
-                )}
+                <p className="text-2xl font-serif font-bold text-primary">每月</p>
+                <p className="text-xs text-muted-foreground mt-0.5">定期</p>
               </div>
 
               {/* Info */}
@@ -240,40 +243,44 @@ export default function EventsPage() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs px-2 py-0.5 border border-primary/40 text-primary/90 rounded-full">線上直播</span>
                   <span className="text-xs text-muted-foreground flex items-center gap-1"><Wifi size={10} /> Zoom · 免費</span>
-                  {session && (
-                    <span className="text-xs px-2 py-0.5 bg-primary text-primary-foreground rounded-full font-bold ml-auto">
-                      第 {session.sessionNumber} 場 · 現正開放報名
-                    </span>
-                  )}
                 </div>
                 <h3 className="text-xl font-serif font-bold">宇宙數字原力學 線上直播講座</h3>
-                {session ? (
-                  <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1.5"><Calendar size={13} className="text-primary" />{formatted?.date}</span>
-                    <span className="flex items-center gap-1.5"><Clock size={13} className="text-primary" />{formatted?.time} 開始（共 90 分鐘）</span>
-                  </div>
-                ) : sessionError ? (
-                  <p className="text-muted-foreground text-sm">目前無開放場次，敬請期待下一場</p>
-                ) : (
+
+                {/* Session list */}
+                {sessionError ? (
+                  <p className="text-muted-foreground text-sm">目前無開放場次，敬請期待</p>
+                ) : sessions.length === 0 ? (
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+                    <div className="w-3 h-3 rounded-full border-2 border-primary border-t-transparent animate-spin" />
                     <span className="text-muted-foreground text-sm">載入場次資訊…</span>
                   </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {sessions.map(s => {
+                      const f = formatDate(s.sessionDate);
+                      return (
+                        <span key={s.id} className="flex items-center gap-1.5 text-xs bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded-full">
+                          <Calendar size={11} /> {f.date} {f.time}
+                        </span>
+                      );
+                    })}
+                  </div>
                 )}
+
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   90 分鐘，解鎖你的靈魂藍圖——主命數、靈魂數、人格數、貴人數、成熟數、流年數，一組數字看見從未看過的自己。
                 </p>
 
                 {/* CTA row */}
                 <div className="flex flex-wrap gap-3 pt-1">
-                  {session ? (
+                  {sessions.length > 0 && (
                     <button
                       onClick={() => setRegOpen(v => !v)}
                       className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-bold rounded-full hover:bg-primary/90 transition-all"
                     >
                       {regOpen ? <><ChevronUp size={15} /> 收起報名表</> : <><ChevronDown size={15} /> 立即報名（免費）</>}
                     </button>
-                  ) : null}
+                  )}
                   <Link href="/lecture">
                     <span className="flex items-center gap-1 px-5 py-2.5 border border-primary/40 text-primary/80 text-sm font-medium rounded-full hover:border-primary hover:text-primary transition-all cursor-pointer">
                       查看完整活動頁 <ExternalLink size={12} />
@@ -285,7 +292,7 @@ export default function EventsPage() {
 
             {/* Inline registration form */}
             <AnimatePresence>
-              {regOpen && session && (
+              {regOpen && sessions.length > 0 && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
@@ -295,7 +302,7 @@ export default function EventsPage() {
                 >
                   <div className="border-t border-primary/20 px-7 py-6 bg-card/60">
                     <p className="text-sm font-semibold mb-4 text-foreground">填寫報名資料</p>
-                    <NumerologyRegForm session={session} onClose={() => setRegOpen(false)} />
+                    <NumerologyRegForm sessions={sessions} onClose={() => setRegOpen(false)} />
                   </div>
                 </motion.div>
               )}

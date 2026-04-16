@@ -10,6 +10,7 @@ interface Session {
   sessionDate: string;
   title: string;
   description: string | null;
+  isActive: boolean;
 }
 
 function formatDate(iso: string) {
@@ -20,7 +21,7 @@ function formatDate(iso: string) {
   const wd = weekdays[d.getDay()];
   const h = d.getHours().toString().padStart(2, "0");
   const min = d.getMinutes().toString().padStart(2, "0");
-  return { date: `${m} 月 ${day} 日（週${wd}）`, time: `${h}:${min}` };
+  return { date: `${m} 月 ${day} 日（週${wd}）`, time: `${h}:${min}`, short: `${m}/${day}` };
 }
 
 const personalities = [
@@ -60,8 +61,9 @@ const faqItems = [
 ];
 
 export default function NumerologyEventPage() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [sessions, setSessions] = useState<Session[]>([]);
   const [loadError, setLoadError] = useState(false);
+  const [selectedSessionId, setSelectedSessionId] = useState<number | null>(null);
   const [form, setForm] = useState({ name: "", phone: "", email: "", lineId: "", referralSource: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -70,9 +72,14 @@ export default function NumerologyEventPage() {
   const [openNum, setOpenNum] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch(`${API}/api/numerology/current-session`)
+    fetch(`${API}/api/numerology/sessions`)
       .then(r => r.ok ? r.json() : Promise.reject())
-      .then(setSession)
+      .then((data: Session[]) => {
+        setSessions(data);
+        // Default select the active session, or first one
+        const active = data.find(s => s.isActive) ?? data[0];
+        if (active) setSelectedSessionId(active.id);
+      })
       .catch(() => setLoadError(true));
   }, []);
 
@@ -80,12 +87,13 @@ export default function NumerologyEventPage() {
     e.preventDefault();
     setError("");
     if (!form.name.trim() || !form.phone.trim()) { setError("請填寫姓名和手機號碼"); return; }
+    if (!selectedSessionId) { setError("請選擇要參加的場次"); return; }
     setSubmitting(true);
     try {
       const res = await fetch(`${API}/api/numerology/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, sessionId: selectedSessionId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "報名失敗");
@@ -97,7 +105,8 @@ export default function NumerologyEventPage() {
     }
   }
 
-  const formatted = session ? formatDate(session.sessionDate) : null;
+  const selectedSession = sessions.find(s => s.id === selectedSessionId) ?? null;
+  const formatted = selectedSession ? formatDate(selectedSession.sessionDate) : null;
 
   return (
     <div className="min-h-screen bg-[#0a0f1e] text-white font-sans">
@@ -127,24 +136,49 @@ export default function NumerologyEventPage() {
             </p>
           </motion.div>
 
-          {/* Session Info Card */}
+          {/* Session Picker Card */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}
             className="mt-10 max-w-md mx-auto">
             <div className="bg-white/5 border border-[#c9a84c]/30 rounded-2xl px-6 py-5 text-left">
-              {session ? (
-                <>
-                  <p className="text-[#c9a84c] text-xs tracking-widest mb-3 font-medium">第 {session.sessionNumber} 場 · 現正開放報名</p>
-                  <div className="flex items-center gap-3 mb-2"><Calendar size={15} className="text-[#c9a84c] shrink-0" /><span className="text-white font-semibold">{formatted?.date}</span></div>
-                  <div className="flex items-center gap-3 mb-2"><Clock size={15} className="text-[#c9a84c] shrink-0" /><span className="text-white/80">{formatted?.time} 開始（共 90 分鐘）</span></div>
-                  <div className="flex items-center gap-3"><Wifi size={15} className="text-[#c9a84c] shrink-0" /><span className="text-white/80">Zoom 線上直播 · 完全免費</span></div>
-                </>
-              ) : loadError ? (
+              {loadError ? (
                 <p className="text-white/40 text-sm text-center py-2">目前沒有開放報名的場次，請稍後再試</p>
-              ) : (
+              ) : sessions.length === 0 ? (
                 <div className="flex items-center justify-center py-3 gap-3">
                   <div className="w-4 h-4 rounded-full border-2 border-[#c9a84c] border-t-transparent animate-spin" />
                   <span className="text-white/40 text-sm">載入場次資訊…</span>
                 </div>
+              ) : (
+                <>
+                  <p className="text-[#c9a84c] text-xs tracking-widest mb-3 font-medium">選擇你想參加的場次</p>
+                  <div className="space-y-2">
+                    {sessions.map(s => {
+                      const f = formatDate(s.sessionDate);
+                      const isSelected = selectedSessionId === s.id;
+                      return (
+                        <button key={s.id} onClick={() => setSelectedSessionId(s.id)}
+                          className={`w-full text-left rounded-xl px-4 py-3 border transition-all ${isSelected ? "border-[#c9a84c] bg-[#c9a84c]/10" : "border-white/10 hover:border-[#c9a84c]/40"}`}>
+                          <div className="flex items-center gap-3">
+                            <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center ${isSelected ? "border-[#c9a84c]" : "border-white/30"}`}>
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-[#c9a84c]" />}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className={`font-semibold text-sm ${isSelected ? "text-white" : "text-white/70"}`}>
+                                第 {s.sessionNumber} 場 · {f.date}
+                              </p>
+                              <p className="text-white/40 text-xs mt-0.5">{f.time} 開始（共 90 分鐘）· Zoom 直播</p>
+                            </div>
+                            {s.isActive && (
+                              <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full shrink-0">開放中</span>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="flex items-center gap-2 mt-3 text-white/40 text-xs">
+                    <Wifi size={12} /><span>Zoom 線上直播 · 完全免費</span>
+                  </div>
+                </>
               )}
             </div>
             <div className="mt-4">
@@ -336,6 +370,11 @@ export default function NumerologyEventPage() {
                 className="bg-white/5 border border-[#c9a84c]/40 rounded-2xl p-10 text-center">
                 <CheckCircle className="text-[#c9a84c] mx-auto mb-4" size={40} />
                 <h3 className="font-serif text-xl font-bold mb-2">報名成功！</h3>
+                {selectedSession && (
+                  <p className="text-[#c9a84c] text-sm font-semibold mb-2">
+                    第 {selectedSession.sessionNumber} 場 · {formatDate(selectedSession.sessionDate).date}
+                  </p>
+                )}
                 <p className="text-white/60 text-sm leading-relaxed">感謝你的報名，JJ 老師將在講座開始前<br />透過 LINE 傳送直播連結給你。</p>
                 {form.email && (
                   <p className="text-[#c9a84c]/80 text-xs mt-3 bg-[#c9a84c]/8 border border-[#c9a84c]/20 rounded-lg px-4 py-2">
@@ -346,11 +385,35 @@ export default function NumerologyEventPage() {
               </motion.div>
             ) : (
               <motion.form key="form" onSubmit={handleSubmit} className="bg-white/4 border border-white/12 rounded-2xl p-8 space-y-5">
-                {loadError && (
+                {loadError ? (
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg px-4 py-3 text-yellow-300 text-sm text-center">
                     ⚠ 目前沒有開放報名的場次，請稍後再試
                   </div>
-                )}
+                ) : sessions.length > 0 ? (
+                  <div>
+                    <p className="text-sm text-white/70 mb-2">選擇參加場次 <span className="text-[#c9a84c]">*</span></p>
+                    <div className="space-y-2">
+                      {sessions.map(s => {
+                        const f = formatDate(s.sessionDate);
+                        const isSelected = selectedSessionId === s.id;
+                        return (
+                          <button type="button" key={s.id} onClick={() => setSelectedSessionId(s.id)}
+                            className={`w-full text-left rounded-lg px-4 py-3 border transition-all ${isSelected ? "border-[#c9a84c] bg-[#c9a84c]/10" : "border-white/15 hover:border-[#c9a84c]/40"}`}>
+                            <div className="flex items-center gap-3">
+                              <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center ${isSelected ? "border-[#c9a84c]" : "border-white/30"}`}>
+                                {isSelected && <div className="w-2 h-2 rounded-full bg-[#c9a84c]" />}
+                              </div>
+                              <div>
+                                <p className={`text-sm font-semibold ${isSelected ? "text-white" : "text-white/60"}`}>第 {s.sessionNumber} 場 · {f.date}</p>
+                                <p className="text-white/35 text-xs">{f.time}–21:00 · Zoom 直播</p>
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : null}
                 <div>
                   <label className="block text-sm text-white/70 mb-1.5">姓名 <span className="text-[#c9a84c]">*</span></label>
                   <input type="text" placeholder="你的姓名" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}

@@ -22,25 +22,50 @@ router.get("/numerology/current-session", async (_req, res) => {
   }
 });
 
-// POST /api/numerology/register — register for the active session (public)
+// GET /api/numerology/sessions — get all open sessions for public registration
+router.get("/numerology/sessions", async (_req, res) => {
+  try {
+    const sessions = await db
+      .select()
+      .from(numerologySessionsTable)
+      .orderBy(numerologySessionsTable.sessionDate);
+    return res.json(sessions);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// POST /api/numerology/register — register for a session (public)
 router.post("/numerology/register", async (req, res) => {
   try {
-    const { name, phone, email, lineId, lifeNumber, referralSource } = req.body;
+    const { name, phone, email, lineId, lifeNumber, referralSource, sessionId } = req.body;
 
     if (!name || !phone) {
       return res.status(400).json({ error: "姓名和手機為必填" });
     }
 
-    // Find active session
-    const [session] = await db
-      .select()
-      .from(numerologySessionsTable)
-      .where(eq(numerologySessionsTable.isActive, true))
-      .orderBy(desc(numerologySessionsTable.sessionDate))
-      .limit(1);
+    // Find requested session or fall back to active
+    let session;
+    if (sessionId) {
+      const [found] = await db
+        .select()
+        .from(numerologySessionsTable)
+        .where(eq(numerologySessionsTable.id, parseInt(sessionId, 10)))
+        .limit(1);
+      session = found;
+    } else {
+      const [found] = await db
+        .select()
+        .from(numerologySessionsTable)
+        .where(eq(numerologySessionsTable.isActive, true))
+        .orderBy(desc(numerologySessionsTable.sessionDate))
+        .limit(1);
+      session = found;
+    }
 
     if (!session) {
-      return res.status(400).json({ error: "目前沒有開放報名的場次" });
+      return res.status(400).json({ error: "找不到指定場次，請重新選擇" });
     }
 
     // Upsert contact
