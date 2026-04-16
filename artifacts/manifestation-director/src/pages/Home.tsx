@@ -37,7 +37,7 @@ const CTAButton = () => (
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground font-sans min-h-screen selection:bg-primary/30 selection:text-primary">
+    <div className="bg-background text-foreground font-sans min-h-screen selection:bg-primary/30 selection:text-primary pt-16">
 
       {/* Ambient background glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
