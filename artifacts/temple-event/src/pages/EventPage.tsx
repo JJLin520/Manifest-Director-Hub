@@ -8,7 +8,6 @@ type FormData = {
   lineId: string;
   attendees: string;
   hasLantern: string;
-  prayerNames: string;
   referralSource: string[];
 };
 
@@ -18,7 +17,6 @@ const initialForm: FormData = {
   lineId: "",
   attendees: "1",
   hasLantern: "",
-  prayerNames: "",
   referralSource: [],
 };
 
@@ -280,18 +278,6 @@ export default function EventPage() {
                   </label>
                 ))}
               </div>
-            </Field>
-
-            {/* 6. 祈福對象 */}
-            <Field label="祈福對象姓名" hint="茶會中我們將引導大眾為家人祈福回向，若有特定的祈福對象，請留下他/她們的姓名（選填）。">
-              <textarea
-                name="prayerNames"
-                value={form.prayerNames}
-                onChange={handleChange}
-                rows={3}
-                placeholder="例：媽媽 王美玲、外婆 陳秀蘭"
-                className={`${inputClass} resize-none`}
-              />
             </Field>
 
             {/* 8. 來源 */}
