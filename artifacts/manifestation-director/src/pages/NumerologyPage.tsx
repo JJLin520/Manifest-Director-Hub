@@ -223,16 +223,6 @@ export default function NumerologyPage() {
         )}
       </AnimatePresence>
 
-      {/* LINE sticky button */}
-      <a
-        href="https://lin.ee/Nq1MhuY"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-6 py-3.5 bg-[#06C755] text-white font-bold rounded-full shadow-lg hover:bg-[#05a847] transition-all text-sm whitespace-nowrap"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 2C6.48 2 2 6.03 2 11c0 3.08 1.72 5.79 4.32 7.47V22l3.36-1.85c.75.21 1.53.32 2.32.32 5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-        加入 LINE，領取你的完整數字解讀
-      </a>
     </div>
   );
 }
