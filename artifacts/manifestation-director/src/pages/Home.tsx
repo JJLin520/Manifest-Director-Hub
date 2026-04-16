@@ -57,7 +57,8 @@ export default function Home() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              同樣的感情模式。同樣的錢的焦慮。<br className="hidden md:block" />
+              同樣的感情模式。<br />
+              同樣的錢的焦慮。<br />
               同樣的那個聲音說：「你不行。」
             </p>
           </FadeIn>
