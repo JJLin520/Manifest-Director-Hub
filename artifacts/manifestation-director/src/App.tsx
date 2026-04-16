@@ -16,15 +16,17 @@ function Router() {
   return (
     <>
       <Nav />
-      <Switch>
-        <Route path="/" component={BrandHome} />
-        <Route path="/course" component={CoursePage} />
-        <Route path="/numerology" component={NumerologyPage} />
-        <Route path="/services" component={ServicesPage} />
-        <Route path="/events" component={EventsPage} />
-        <Route path="/about" component={AboutPage} />
-        <Route component={BrandHome} />
-      </Switch>
+      <div className="pb-16 md:pb-0">
+        <Switch>
+          <Route path="/" component={BrandHome} />
+          <Route path="/course" component={CoursePage} />
+          <Route path="/numerology" component={NumerologyPage} />
+          <Route path="/services" component={ServicesPage} />
+          <Route path="/events" component={EventsPage} />
+          <Route path="/about" component={AboutPage} />
+          <Route component={BrandHome} />
+        </Switch>
+      </div>
     </>
   );
 }
