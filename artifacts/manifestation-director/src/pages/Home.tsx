@@ -76,7 +76,63 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-      {/* ── PART 2：WHY — 為什麼你一直卡住？科學說明 ── */}
+      {/* ── PART 2：故事 — 我自己走過那段黑暗 ── */}
+      <section className="py-24 md:py-32 px-6 relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <SectionLabel>創辦人的故事</SectionLabel>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 text-primary/90">
+              「我自己也曾經以為，一切都是命運。」
+            </h2>
+          </FadeIn>
+
+          <div className="space-y-6 text-lg md:text-xl leading-loose text-muted-foreground relative">
+            <div className="hidden md:block absolute left-[-32px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/0 via-primary/20 to-primary/0" />
+
+            <FadeIn delay={0.1}>
+              <p>
+                那一年，我創業失敗搞到負債。不是電影裡帥氣的那種破釜沉舟——
+                是<span className="text-foreground">深夜盯著帳單、不敢接電話、不知道明天怎麼辦</span>的真實窒息感。
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <p>
+                我開始覺得，這條路走不出去了。<span className="text-foreground">進入了憂鬱症的狀態。</span>
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <div className="border-l-2 border-primary/40 pl-6 py-2 my-2">
+                <p className="text-foreground">
+                  就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。老實說，我半信半疑。
+                  但那個當下的我，已經沒有什麼好失去了，所以我決定報名課程，親自驗證它到底有沒有效。
+                  就在這段探索的路途上，某些東西在我內在鬆動了。
+                </p>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <p>
+                我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走，
+                深入學習精進——生命開始，不是「好轉」，而是
+                <span className="text-primary font-semibold">親證翻轉。</span>
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.35}>
+              <p>
+                我後來才明白：困住我的，不是負債本身，
+                是我腦袋裡那套<span className="text-foreground font-medium">比負債更古老的程式——你的潛意識，甚至是你的種子資料庫</span>
+                <span className="text-muted-foreground/80">（佛法把它叫做阿賴耶識，西方把它叫做阿卡西紀錄）</span>。
+              </p>
+            </FadeIn>
+          </div>
+
+          <FadeIn delay={0.45}>
+            <div className="mt-12 flex flex-col items-center gap-6 text-center">
+              <CTAButton />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+      {/* ── PART 3：WHY — 為什麼你一直卡住？科學說明 ── */}
       <section className="py-24 md:py-32 px-6 bg-card/50 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <FadeIn>
@@ -125,66 +181,6 @@ export default function Home() {
             <p className="text-xl md:text-2xl font-serif font-medium text-primary/90 pt-4">
               「你現在的人生，正是你的潛意識程式的外在顯化。」
             </p>
-          </FadeIn>
-        </div>
-      </section>
-      {/* ── PART 3：故事 — 我自己走過那段黑暗 ── */}
-      <section className="py-24 md:py-32 px-6 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          <FadeIn>
-            <SectionLabel>創辦人的故事</SectionLabel>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-10 text-primary/90">
-              「我自己也曾經以為，一切都是命運。」
-            </h2>
-          </FadeIn>
-
-          <div className="space-y-6 text-lg md:text-xl leading-loose text-muted-foreground relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-[-32px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/0 via-primary/20 to-primary/0" />
-
-            <FadeIn delay={0.1}>
-              <p>
-                那一年，我創業失敗搞到負債。不是電影裡帥氣的那種破釜沉舟——
-                是<span className="text-foreground">深夜盯著帳單、不敢接電話、不知道明天怎麼辦</span>的真實窒息感。
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <p>
-                我開始覺得，這條路走不出去了。<span className="text-foreground">進入了憂鬱症的狀態。</span>
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <div className="border-l-2 border-primary/40 pl-6 py-2 my-2">
-                <p className="text-foreground">就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。 老實說，我半信半疑。但那個當下的我，已經沒有什麼好失去的了，所以我決定親自驗證有沒有效。</p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.25}>
-              <p>
-                我報名了課程。那一天，<span className="text-foreground font-medium">某個東西在我內部鬆動了。</span>
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.3}>
-              <p>
-                我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走，
-                深入學習精進——生命開始，不是「好轉」，而是
-                <span className="text-primary font-semibold">親證翻轉。
-                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。"
-</span>
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.35}>
-              <p>
-                我後來才明白：困住我的，不是負債本身，
-                是我腦袋裡那套<span className="text-foreground font-medium">比負債更古老的程式——你的潛意識，甚至是你的種子資料庫</span>
-                <span className="text-muted-foreground/80">（佛法把它叫做阿賴耶識，西方把它叫做阿卡西紀錄）</span>。
-              </p>
-            </FadeIn>
-          </div>
-
-          <FadeIn delay={0.45}>
-            <div className="mt-12 flex flex-col items-center gap-6 text-center">
-              <CTAButton />
-            </div>
           </FadeIn>
         </div>
       </section>
