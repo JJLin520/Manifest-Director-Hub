@@ -165,7 +165,7 @@ export default function Home() {
               <p className="text-foreground/90 font-medium">
                 所以我知道，大部分的人需要的，不是一個「課程」——
                 <br className="hidden md:block" />
-                而是一個<span className="text-primary font-bold">持續不斷、可以親證的環境</span>。
+                而是有一個<span className="text-primary font-bold">方法系統</span>，帶著你不只一步步知道，甚至可以<span className="text-primary font-bold">持續不斷做到</span>的環境。
               </p>
             </FadeIn>
           </div>
