@@ -9,6 +9,7 @@ import ServicesPage from "@/pages/ServicesPage";
 import EventsPage from "@/pages/EventsPage";
 import AboutPage from "@/pages/AboutPage";
 import NumerologyPage from "@/pages/NumerologyPage";
+import NumerologyEventPage from "@/pages/NumerologyEventPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ function Router() {
           <Route path="/numerology" component={NumerologyPage} />
           <Route path="/services" component={ServicesPage} />
           <Route path="/events" component={EventsPage} />
+          <Route path="/lecture" component={NumerologyEventPage} />
           <Route path="/about" component={AboutPage} />
           <Route component={BrandHome} />
         </Switch>

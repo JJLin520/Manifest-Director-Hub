@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Dashboard from "@/pages/Dashboard";
 import Registrations from "@/pages/Registrations";
 import Contacts from "@/pages/Contacts";
+import NumerologySessions from "@/pages/NumerologySessions";
 import Layout from "@/components/Layout";
 import Login from "@/pages/Login";
 import NotFound from "@/pages/not-found";
@@ -24,6 +25,7 @@ function Router({ onLogout }: { onLogout: () => void }) {
         <Route path="/" component={Dashboard} />
         <Route path="/registrations" component={Registrations} />
         <Route path="/contacts" component={Contacts} />
+        <Route path="/numerology" component={NumerologySessions} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
