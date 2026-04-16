@@ -26,14 +26,17 @@ interface Session {
 }
 
 function formatDate(iso: string) {
-  const d = new Date(iso);
+  const [datePart, timePart = "00:00"] = iso.split("T");
+  const [year, m, day] = datePart.split("-").map(Number);
+  const [h, min] = timePart.replace(/Z.*$/, "").split(":").map(Number);
   const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  const wd = weekdays[d.getDay()];
-  const h = d.getHours().toString().padStart(2, "0");
-  const min = d.getMinutes().toString().padStart(2, "0");
-  return { date: `${m} 月 ${day} 日（週${wd}）`, time: `${h}:${min}`, month: `${m}月`, day: String(day) };
+  const wd = weekdays[new Date(year, m - 1, day).getDay()];
+  return {
+    date: `${m} 月 ${day} 日（週${wd}）`,
+    time: `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`,
+    month: `${m}月`,
+    day: String(day),
+  };
 }
 
 const otherEvents = [
