@@ -174,6 +174,11 @@ export default function Home() {
                 <span className="text-primary font-semibold">親證翻轉。</span>
               </p>
             </FadeIn>
+            <FadeIn delay={0.33}>
+              <p className="text-sm text-muted-foreground/70 italic border-l-2 border-primary/30 pl-4">
+                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
+              </p>
+            </FadeIn>
             <FadeIn delay={0.35}>
               <p>
                 我後來才明白：困住我的，不是負債本身，
