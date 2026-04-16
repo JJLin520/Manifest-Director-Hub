@@ -102,11 +102,7 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={0.2}>
               <div className="border-l-2 border-primary/40 pl-6 py-2 my-2">
-                <p className="text-foreground">
-                  就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。老實說，我半信半疑。
-                  但那個當下的我，已經沒有什麼好失去了，所以我決定報名課程，親自驗證它到底有沒有效。
-                  就在這段探索的路途上，某些東西在我內在鬆動了。
-                </p>
+                <p className="text-foreground">就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。老實說，我半信半疑。 但那個當下的我，已經沒有什麼好失去了，我決定報名課程，親自驗證它到底有沒有效。 在這段探索的路途上，某些東西在我內在鬆動了。</p>
               </div>
             </FadeIn>
             <FadeIn delay={0.3}>
