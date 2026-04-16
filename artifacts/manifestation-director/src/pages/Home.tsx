@@ -129,9 +129,6 @@ export default function Home() {
                   但那個當下的我，<span className="text-primary font-semibold">已經沒有什麼好失去了</span>，
                   所以我決定報名課程，親自驗證它到底有沒有效。
                 </p>
-                <p className="text-foreground/80 italic">
-                  就在這段探索的路途上，某些東西在我內在鬆動了。
-                </p>
               </div>
             </FadeIn>
 
