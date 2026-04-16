@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 
 const links = [
+  { href: "/numerology", label: "數字測驗" },
   { href: "/services", label: "服務介紹" },
   { href: "/events", label: "講座活動" },
   { href: "/about", label: "關於我們" },
