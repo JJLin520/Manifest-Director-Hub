@@ -68,7 +68,24 @@ export default function Home() {
                 <span className="text-foreground font-semibold">是有人從來沒告訴你——你的大腦，有一套你不知道的作業系統正在運行。</span><br /><br />
                 而這套系統，決定了你的收入、你的感情、你的自我價值感——
                 <span className="text-primary font-semibold">在你完全沒有察覺的情況下。</span><br /><br />
-                <span className="text-foreground font-semibold">它，就叫做潛意識。</span>
+                <motion.span
+                  className="block mt-2 text-2xl md:text-3xl font-serif font-bold tracking-wide"
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.1, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  style={{
+                    background: "linear-gradient(90deg, #e6af32 0%, #fffbe6 50%, #e6af32 100%)",
+                    backgroundSize: "200% auto",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    filter: "drop-shadow(0 0 18px rgba(230,175,50,0.55))",
+                    animation: "shimmer 3s linear infinite",
+                  }}
+                >
+                  它，就叫做潛意識。
+                </motion.span>
               </p>
             </div>
           </FadeIn>
