@@ -94,13 +94,16 @@ export default function Home() {
               </div>
               <Divider />
             </div>
-            <blockquote className="text-2xl md:text-4xl font-serif leading-relaxed italic text-primary/90">
-              「當我們不理解潛意識時，<br className="hidden md:block" />
+            <blockquote className="text-2xl md:text-4xl font-serif leading-[1.8] italic text-primary/90 max-w-2xl mx-auto">
+              「當我們不理解潛意識時，<br />
               我們以為自己活在命運裡；<br />
-              當我們掌握潛意識時，<br className="hidden md:block" />
+              當我們掌握潛意識時，<br />
               命運就掌握在我們手中。」
             </blockquote>
-            <p className="mt-4 text-muted-foreground tracking-widest uppercase text-sm">— Carl Jung</p>
+            <div className="mt-6 space-y-1">
+              <p className="text-muted-foreground tracking-widest text-sm">— Carl Jung（卡爾．榮格）</p>
+              <p className="text-muted-foreground/50 text-xs tracking-wider">著名心理學大師</p>
+            </div>
           </FadeIn>
 
           <FadeIn delay={0.2}>
