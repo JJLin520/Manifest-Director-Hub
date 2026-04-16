@@ -174,18 +174,23 @@ export default function Home() {
                 <span className="text-primary font-semibold">親證翻轉。</span>
               </p>
             </FadeIn>
-            <FadeIn delay={0.33}>
-              <p className="text-sm text-muted-foreground/70 italic border-l-2 border-primary/30 pl-4">
-                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
-              </p>
-            </FadeIn>
             <FadeIn delay={0.35}>
               <p>
                 我後來才明白：困住我的，不是負債本身，
-                是我腦袋裡那套<span className="text-foreground font-medium">比負債更古老的程式。</span>
+                是我腦袋裡那套<span className="text-foreground font-medium">比負債更古老的程式——你的潛意識，甚至是你的種子資料庫</span>
+                <span className="text-muted-foreground/80">（佛法把它叫做阿賴耶識，西方把它叫做阿卡西紀錄）</span>。
               </p>
             </FadeIn>
           </div>
+
+          <FadeIn delay={0.45}>
+            <div className="mt-12 flex flex-col items-center gap-6 text-center">
+              <CTAButton />
+              <p className="text-sm text-muted-foreground/60 italic border-l-2 border-primary/20 pl-4 text-left max-w-lg">
+                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
