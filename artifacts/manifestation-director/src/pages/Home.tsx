@@ -86,37 +86,86 @@ export default function Home() {
             </h2>
           </FadeIn>
 
-          <div className="space-y-6 text-lg md:text-xl leading-loose text-muted-foreground relative">
+          <div className="space-y-8 text-lg md:text-xl leading-loose text-muted-foreground relative">
             <div className="hidden md:block absolute left-[-32px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/0 via-primary/20 to-primary/0" />
 
             <FadeIn delay={0.1}>
               <p>
                 那一年，我創業失敗搞到負債。不是電影裡帥氣的那種破釜沉舟——
-                是<span className="text-foreground">深夜盯著帳單、不敢接電話、不知道明天怎麼辦</span>的真實窒息感。
+                是<span className="text-foreground font-medium">深夜盯著帳單、不敢接電話、不知道明天怎麼辦</span>的真實窒息感。
               </p>
             </FadeIn>
+
             <FadeIn delay={0.15}>
               <p>
-                我開始覺得，這條路走不出去了。<span className="text-foreground">進入了憂鬱症的狀態。</span>
+                我開始覺得，這條路走不出去了。<span className="text-foreground font-medium">進入了憂鬱症的狀態。</span>
               </p>
             </FadeIn>
+
             <FadeIn delay={0.2}>
-              <div className="border-l-2 border-primary/40 pl-6 py-2 my-2">
-                <p className="text-foreground">就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。老實說，我半信半疑。 但那個當下的我，已經沒有什麼好失去了，我決定報名課程，親自驗證它到底有沒有效。 在這段探索的路途上，某些東西在我內在鬆動了。</p>
+              <div className="border-l-2 border-primary/50 pl-6 py-3 my-2 space-y-3">
+                <p className="text-foreground">
+                  就在那個幾乎要放棄的夜晚，我因緣際會，聽到了探索「潛意識」的講座。老實說，我半信半疑。
+                </p>
+                <p className="text-foreground">
+                  但那個當下的我，<span className="text-primary font-semibold">已經沒有什麼好失去了</span>，
+                  所以我決定報名課程，親自驗證它到底有沒有效。
+                </p>
+                <p className="text-foreground/80 italic">
+                  就在這段探索的路途上，某些東西在我內在鬆動了。
+                </p>
               </div>
             </FadeIn>
-            <FadeIn delay={0.3}>
+
+            <FadeIn delay={0.25}>
               <p>
-                我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走，
-                深入學習精進——生命開始，不是「好轉」，而是
-                <span className="text-primary font-semibold">親證翻轉。</span>
+                當我開始理解什麼是潛意識，我才發現——
+                困住我的，<span className="text-foreground font-medium">不是負債本身</span>，
+                是我腦袋裡那套<span className="text-foreground font-bold">比負債更古老的程式</span>——
+                你的潛意識，甚至是你的種子資料庫
+                <span className="text-muted-foreground/70 text-base">（佛法把它叫做阿賴耶識，西方把它叫做阿卡西紀錄）</span>。
               </p>
             </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <p>
+                我開始每天自我催眠，調整我內在的程式、療癒過去並肯定我自己，
+                甚至深入學習 NLP 教練技術，<span className="text-foreground font-medium">成為了可以頒發 NGH 催眠證照的導師</span>。
+              </p>
+            </FadeIn>
+
             <FadeIn delay={0.35}>
               <p>
-                我後來才明白：困住我的，不是負債本身，
-                是我腦袋裡那套<span className="text-foreground font-medium">比負債更古老的程式——你的潛意識，甚至是你的種子資料庫</span>
-                <span className="text-muted-foreground/80">（佛法把它叫做阿賴耶識，西方把它叫做阿卡西紀錄）</span>。
+                同時，我一邊認真工作，又再次創業成功，
+                <span className="text-foreground font-medium">甚至把公司賣掉還清了負債</span>。
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.4}>
+              <p className="text-muted-foreground/80">
+                這一切對我來說很不可思議。如果說跟之前創業失敗有什麼不同，
+                我覺得不是創業項目的差異，而是——<span className="text-foreground font-medium">我內在有一個狀態，改變了。</span>
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.45}>
+              <div className="p-6 md:p-8 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/8 to-transparent">
+                <p className="text-foreground font-serif text-xl md:text-2xl leading-relaxed mb-3">
+                  我的生命開始，不是「好轉」，而是
+                  <span className="text-primary font-bold">　親證翻轉。</span>
+                </p>
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  請留意我說的詞——「親證翻轉」，是當我理解了之後，親自去驗證。
+                  這過程<span className="text-foreground">不是魔法</span>，而是日復一日的覺察、調整並改善。
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.5}>
+              <p className="text-foreground/90 font-medium">
+                所以我知道，大部分的人需要的，不是一個「課程」——
+                <br className="hidden md:block" />
+                而是一個<span className="text-primary font-bold">持續不斷、可以親證的環境</span>。
               </p>
             </FadeIn>
           </div>
