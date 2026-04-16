@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, Wifi, CheckCircle, ChevronDown, ChevronUp, MapPin, ExternalLink } from "lucide-react";
+import { Calendar, Clock, Wifi, CheckCircle, ChevronDown, ChevronUp, MapPin, ExternalLink, Scan } from "lucide-react";
 import { Link } from "wouter";
 
 const API = import.meta.env.VITE_API_URL ?? "";
@@ -338,6 +338,48 @@ export default function EventsPage() {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
+        </FadeIn>
+
+        {/* ── AI 筋膜骨架評測 Featured Card ── */}
+        <FadeIn delay={0.05}>
+          <div className="rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/8 to-transparent overflow-hidden">
+            <div className="flex flex-col md:flex-row gap-5 p-7">
+              <div className="flex-shrink-0 text-center min-w-[64px]">
+                <div className="w-14 h-14 rounded-full bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center mx-auto">
+                  <Scan size={22} className="text-cyan-400" />
+                </div>
+                <p className="text-xs text-muted-foreground mt-1.5">預約制</p>
+              </div>
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs px-2 py-0.5 border border-cyan-500/40 text-cyan-400/90 rounded-full">AI 評測服務</span>
+                  <span className="text-xs text-muted-foreground">物理治療師專業把關</span>
+                  <span className="text-xs px-2 py-0.5 bg-cyan-500/15 text-cyan-400 rounded-full font-semibold ml-auto">🔥 現正開放預約</span>
+                </div>
+                <h3 className="text-xl font-serif font-bold">AI 骨架筋膜精準評測<br className="md:hidden" /><span className="text-cyan-400"> + 一次性解決方案</span></h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  智能科技，幾分鐘精準分析脊椎曲度、骨盆歪斜、肩膀高低差、肌肉張力——<br />
+                  找出你酸痛問題的真正根源，不再花冤枉錢，一次徹底解決。
+                </p>
+                <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                  {["✔ 脊椎曲度", "✔ 骨盆評估", "✔ 肩膀高低差", "✔ 身體平衡", "✔ 筋膜沾黏"].map(t => (
+                    <span key={t} className="bg-cyan-500/8 border border-cyan-500/15 text-cyan-400/80 px-2 py-1 rounded-md">{t}</span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-3 pt-1">
+                  <Link href="/fascia">
+                    <span className="flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-[#080d1a] text-sm font-bold rounded-full transition-all cursor-pointer">
+                      查看完整服務介紹 →
+                    </span>
+                  </Link>
+                  <a href="https://lin.ee/Nq1MhuY" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-1 px-5 py-2.5 border border-cyan-500/30 text-cyan-400/80 text-sm font-medium rounded-full hover:border-cyan-500 hover:text-cyan-400 transition-all">
+                    加 LINE 預約
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </FadeIn>
 
