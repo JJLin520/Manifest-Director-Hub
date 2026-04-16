@@ -38,13 +38,11 @@ const CTAButton = () => (
 export default function Home() {
   return (
     <div className="bg-background text-foreground font-sans min-h-screen selection:bg-primary/30 selection:text-primary pt-16">
-
       {/* Ambient background glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[150px]" />
       </div>
-
       {/* ── PART 1：共鳴 — 你是否也有過這樣的感覺 ── */}
       <section className="relative min-h-screen flex items-center justify-center pt-24 pb-32 px-6 overflow-hidden z-10">
         <div className="max-w-3xl mx-auto text-center space-y-10 font-serif">
@@ -78,7 +76,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 2：WHY — 為什麼你一直卡住？科學說明 ── */}
       <section className="py-24 md:py-32 px-6 bg-card/50 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-12">
@@ -131,7 +128,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 3：故事 — 我自己走過那段黑暗 ── */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
@@ -174,7 +170,9 @@ export default function Home() {
               <p>
                 我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走，
                 深入學習精進——生命開始，不是「好轉」，而是
-                <span className="text-primary font-semibold">親證翻轉。</span>
+                <span className="text-primary font-semibold">親證翻轉。
+                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
+</span>
               </p>
             </FadeIn>
             <FadeIn delay={0.35}>
@@ -196,7 +194,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 4：你的潛意識在播什麼？ ── */}
       <section className="py-24 md:py-32 px-6 bg-card/30 relative z-10">
         <div className="max-w-5xl mx-auto">
@@ -235,7 +232,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 5：WHAT — 什麼是顯化導演系統 ── */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-4xl mx-auto space-y-14">
@@ -286,7 +282,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 6：HOW — 八個步驟，這是怎麼做到的 ── */}
       <section className="py-24 md:py-32 px-6 bg-card/30 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -326,7 +321,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ── PART 7：學員見證 ── */}
       <section className="py-24 md:py-32 px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
@@ -377,7 +371,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       {/* ── PART 8：定價 ── */}
       <section className="py-24 md:py-32 px-6 bg-card/30 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -428,7 +421,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ── PART 9：最後的話 + CTA ── */}
       <section className="py-32 md:py-48 px-6 relative z-10 overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 rounded-[100%] blur-[120px] scale-150 pointer-events-none" />
@@ -461,11 +453,9 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
       <footer className="py-8 text-center text-muted-foreground/40 text-sm border-t border-primary/10 relative z-10">
         © 2024 宇宙序能教育品牌 ｜ JJ 林炳騰
       </footer>
-
       {/* ── LINE 固定浮動按鈕（手機版） ── */}
       <a
         href="https://lin.ee/Nq1MhuY"
@@ -479,7 +469,6 @@ export default function Home() {
         </svg>
         加入 LINE 諮詢
       </a>
-
     </div>
   );
 }
