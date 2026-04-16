@@ -72,33 +72,28 @@ export default function EventPage() {
 
     setSubmitting(true);
 
-    if (!GOOGLE_SHEETS_URL) {
-      // Demo mode: just show thank you without actually submitting
-      setTimeout(() => {
-        setSubmitting(false);
-        setSubmitted(true);
-      }, 1000);
-      return;
-    }
-
     try {
       const { referralSource, ...rest } = form;
       const payload = {
         ...rest,
         referralSource: referralSource.join("、"),
-        submittedAt: new Date().toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }),
+        eventName: "新店雲陽寺｜五月點燈感恩茶禪會",
       };
 
-      await fetch(GOOGLE_SHEETS_URL, {
+      const res = await fetch("/api/registrations", {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "提交失敗");
+      }
+
       setSubmitted(true);
-    } catch {
-      setError("提交時發生錯誤，請稍後再試，或直接聯繫主辦方。");
+    } catch (err) {
+      setError((err as Error).message || "提交時發生錯誤，請稍後再試，或直接聯繫主辦方。");
     } finally {
       setSubmitting(false);
     }
