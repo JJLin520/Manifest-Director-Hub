@@ -404,26 +404,33 @@ function ResultSection({ result, onReset }: {
         </div>
       </FadeIn>
 
-      {/* Secondary numbers — teaser */}
+      {/* Suspense — 但這只是開始 */}
       <FadeIn delay={0.3}>
-        <div className="mb-8">
-          <p className="text-xs tracking-[0.3em] uppercase text-primary/50 text-center mb-5 font-sans">宇宙的話</p>
-          <p className="text-center text-muted-foreground/70 text-sm mb-5">這只是開始⋯</p>
-          <div className="grid grid-cols-5 gap-2">
-            {secondaryNumbers.map(({ label, value, desc }) => (
-              <div key={label} className="relative group">
-                <div className="bg-white/4 border border-primary/15 rounded-xl p-3 text-center blur-[3px] select-none">
-                  <p className="text-xs text-muted-foreground mb-1">{label}</p>
-                  <p className="font-serif text-2xl font-bold text-primary">{value}</p>
-                  <p className="text-[10px] text-muted-foreground/60 mt-1">{desc}</p>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg">🔒</span>
-                </div>
+        <div className="mb-8 py-8 border-t border-primary/15">
+          <p className="text-xs tracking-[0.3em] uppercase text-primary/60 font-sans mb-4">但這只是開始</p>
+          <h3 className="font-serif text-3xl font-bold leading-tight mb-4 text-foreground">
+            主命數只是你的<br />
+            <span className="text-primary">第一層。</span>
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            你還有五個維度，<br />等著被看見——
+          </p>
+          <div className="space-y-0 divide-y divide-primary/10 border-t border-primary/10">
+            {[
+              { num: "①", label: "主命數", desc: "你的天命核心" },
+              { num: "②", label: "靈魂數", desc: "你內在真正渴望的" },
+              { num: "③", label: "人格數", desc: "你呈現給世界的樣子" },
+              { num: "④", label: "貴人數", desc: "你的貴人頻率在哪裡" },
+              { num: "⑤", label: "成熟數", desc: "你人生後半段的方向" },
+              { num: "⑥", label: "流年數", desc: "你現在正在走的能量" },
+            ].map(({ num, label, desc }) => (
+              <div key={label} className="flex items-center gap-4 py-3">
+                <span className="text-primary/70 text-base w-6 shrink-0">{num}</span>
+                <span className="font-bold text-foreground text-sm w-16 shrink-0">{label}</span>
+                <span className="text-muted-foreground/70 text-sm">{desc}</span>
               </div>
             ))}
           </div>
-          <p className="text-center text-xs text-muted-foreground/50 mt-3">完整解讀請加入 LINE 取得</p>
         </div>
       </FadeIn>
 
