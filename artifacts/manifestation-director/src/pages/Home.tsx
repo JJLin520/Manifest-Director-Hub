@@ -170,9 +170,8 @@ export default function Home() {
               <p>
                 我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走，
                 深入學習精進——生命開始，不是「好轉」，而是
-                <span className="text-primary font-semibold">親證翻轉。
-                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。
-</span>
+                <span className="text-primary font-semibold">親證翻轉。 
+                請留意我用的詞「親證」，因為這個世界不管你相信或不相信，更重要的是你有沒有親自驗證，才會是你自己真正的收穫。</span>
               </p>
             </FadeIn>
             <FadeIn delay={0.35}>
