@@ -17,13 +17,13 @@ function Router() {
     <>
       <Nav />
       <Switch>
-        <Route path="/" component={CoursePage} />
+        <Route path="/" component={BrandHome} />
+        <Route path="/course" component={CoursePage} />
         <Route path="/numerology" component={NumerologyPage} />
-        <Route path="/brand" component={BrandHome} />
         <Route path="/services" component={ServicesPage} />
         <Route path="/events" component={EventsPage} />
         <Route path="/about" component={AboutPage} />
-        <Route component={CoursePage} />
+        <Route component={BrandHome} />
       </Switch>
     </>
   );

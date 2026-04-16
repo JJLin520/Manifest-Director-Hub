@@ -74,7 +74,7 @@ export default function BrandHome() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-serif font-bold leading-tight">
-              宇宙序能
+              顯化導演系統
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
