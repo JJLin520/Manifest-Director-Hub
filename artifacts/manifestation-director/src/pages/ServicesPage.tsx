@@ -126,9 +126,9 @@ const testimonials = [
 ];
 
 const methods = [
-  { level: "道", action: "理解你的生命運作法則", tools: "數字學 × 意識科學" },
-  { level: "法", action: "找到你專屬的顯化路徑", tools: "生命數字盤 × 守護菩薩" },
-  { level: "術", action: "清除潛意識裡的阻礙", tools: "NLP × 催眠 × 深層對話" },
+  { level: "道", action: "理解你的生命運作法則", tools: "生命藍圖解析" },
+  { level: "法", action: "找到你專屬的顯化路徑", tools: "生命數字盤 × 意識科學" },
+  { level: "術", action: "清除潛意識裡的阻礙", tools: "催眠 × NLP 教練技術" },
   { level: "器", action: "讓改變在真實生活裡發生", tools: "儀式 × 群體場域 × 持續陪伴" },
 ];
 
