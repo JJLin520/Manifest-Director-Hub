@@ -12,20 +12,73 @@ const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   </motion.div>
 );
 
+const identities = [
+  "潛意識教練",
+  "國考合格物理治療師",
+  "企業健康講師",
+  "生命藍圖顧問",
+  "NGH 催眠導師",
+];
+
+const credentials = [
+  "台灣大學物理治療學系畢業",
+  "台灣國考合格物理治療師",
+  "NGH 美國催眠師協會認證導師",
+  "NLP 執行師 / 高階執行師 / 導師",
+  "時間線療法認證執行師",
+  "ACE 國際教練認證",
+  "國內外多位大師直接受訓",
+];
+
+const focusAreas = [
+  {
+    icon: "🌿",
+    title: "身心健康",
+    desc: "不靠意志力苦撐，讓養生成為你的生存本能。整合物理治療與潛意識教練，從根本調整身心狀態。",
+  },
+  {
+    icon: "💛",
+    title: "財富意識",
+    desc: "清理對金錢的匱乏恐懼，讓你的財務決策從焦慮轉向清明，建立從內到外的豐盛感。",
+  },
+  {
+    icon: "✨",
+    title: "關係顯化",
+    desc: "帶你愛上那個躲在潛意識裡的自己，自然吸引高頻率的伴侶，創造真實的連結。",
+  },
+];
+
+const milestones = [
+  { year: "2016", label: "台大物理治療學系畢業，通過國家高考取得物理治療師執照" },
+  { year: "2019", label: "創立 YouTube 頻道【型男理療室】，走向自媒體健康教育" },
+  { year: "2020", label: "成立米蔚健康顧問公司，深耕職場健康，累積 300+ 企業講座" },
+  { year: "2021", label: "深度投入催眠、NLP、教練技術，學費投資超過百萬" },
+  { year: "2022", label: "建立心流催眠教練系統，整合催眠、NLP、教練技術與心理學" },
+  { year: "2023", label: "創立「宇宙序能」品牌，推出人生導演系統，持續陪伴學員轉化" },
+];
+
+const clients = [
+  "台灣積體電路（台積電）",
+  "AWS 亞馬遜網路服務",
+  "荷蘭商臺灣戴爾（Dell）",
+  "全家便利商店",
+  "國家實驗研究院",
+  "伊甸基金會",
+];
+
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/jjloveyou520/", icon: "📸" },
+  { label: "YouTube｜靈魂診療室", href: "https://www.youtube.com/channel/UCa0yWsASqozpHccxHffUL0A/featured", icon: "▶" },
+  { label: "Facebook", href: "https://www.facebook.com/ntutraveler.lin", icon: "📘" },
+  { label: "Apple Podcast", href: "https://reurl.cc/OEj0Lg", icon: "🎙" },
+  { label: "電子名片", href: "https://pse.is/supercardjj", icon: "🪪" },
+];
+
 const values = [
   { icon: "◎", title: "親身驗證", desc: "我們只教自己走過、驗證過的方法。不是理論，是真實走出來的路。" },
   { icon: "◈", title: "看見本質", desc: "不治標，直搗根源。找到那個信念最初是怎麼種進來的，才能真正拔除。" },
   { icon: "◉", title: "陪伴到底", desc: "轉化不是一次感動，是長期的練習。我們在你每一個步驟旁邊。" },
   { icon: "◌", title: "每個人都值得", desc: "不論你的起點在哪，改變都是可能的。這不是我說的，是神經科學。" },
-];
-
-const credentials = [
-  "NLP 執行師 / 高階執行師認證",
-  "催眠導師認證（NGH 美國催眠師公會）",
-  "時間線療法認證執行師",
-  "ACE 國際教練認證",
-  "國考合格物理治療師",
-  "國內外多位大師直接受訓",
 ];
 
 export default function AboutPage() {
@@ -40,55 +93,129 @@ export default function AboutPage() {
       <section className="relative z-10 py-24 px-6 text-center">
         <div className="max-w-2xl mx-auto space-y-5">
           <FadeIn>
-            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase">關於宇宙序能</p>
+            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase">導師介紹</p>
             <h1 className="text-4xl md:text-5xl font-serif font-bold mt-3">
-              宇宙序能<br className="md:hidden" />教育品牌
+              JJ 林炳騰
             </h1>
+            <p className="text-primary font-serif text-xl md:text-2xl font-semibold mt-2 tracking-wide">
+              你的人生普拿疼
+            </p>
           </FadeIn>
           <FadeIn delay={0.15}>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              「序能」——整理能量，回歸秩序，讓生命的本然力量流動起來。
+            <div className="flex flex-wrap gap-2 justify-center mt-4">
+              {identities.map((id) => (
+                <span
+                  key={id}
+                  className="text-xs px-3 py-1.5 border border-primary/25 rounded-full text-muted-foreground"
+                >
+                  {id}
+                </span>
+              ))}
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <p className="text-muted-foreground text-lg leading-relaxed mt-4">
+              不只療癒過去，更要顯化未來。<br />
+              我整合醫療專業與潛意識科學，幫你找回人生主導權。
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Founder Story */}
+      {/* Personal Story */}
       <section className="relative z-10 py-16 px-6 bg-card/20">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-6">創辦人 JJ 林炳騰</p>
+            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-6">親身見證</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold mb-10 text-primary/90">
-              「我自己也曾經以為，一切都是命運。」
+              「所有的疼痛，都是潛意識發出的求救信。」
             </h2>
           </FadeIn>
 
           <div className="space-y-6 text-lg leading-loose text-muted-foreground">
             <FadeIn delay={0.1}>
-              <p>那一年，創業失敗、負債，不是電影裡帥氣的那種破釜沉舟——是深夜盯著帳單、不敢接電話、不知道明天怎麼辦的真實窒息感。我進入了憂鬱症的狀態。</p>
+              <p>
+                身為台大物理治療師，我服務過上百間企業，做了超過 300 場健康講座。但我發現一個心碎的循環：
+                個案的身體好了，生活習氣卻沒有改變——焦慮還在，問題像回力鏢一樣精準回來。
+              </p>
             </FadeIn>
             <FadeIn delay={0.15}>
               <div className="border-l-2 border-primary/40 pl-6 py-2">
                 <p className="text-foreground">
-                  就在那個幾乎要放棄的夜晚，因緣際會聽到了一場關於「潛意識」的講座。我報名了課程。那一天，某個東西在我內部鬆動了。
+                  我才驚覺：<strong>真正的療癒，是啟動一個人的自癒力。</strong>
+                  而這股力量的開關，不在意識，而在那深達 95% 的潛意識裡。
                 </p>
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p>
-                我開始每天自我催眠，深入 NLP，上了國內外大師的課程，找了教練一對一陪我走。生命開始，不是「好轉」，而是<span className="text-primary font-semibold">親證翻轉</span>。
+                我自己就有整整十年的熬夜習慣。身為醫療人員，我比誰都清楚代價，
+                但就是停不下來——直到我透過催眠深入潛意識，才看見那個「怕落後的小孩」。
+                他覺得白天都在為別人活，只有深夜才擁有真正的自由與掌控權。
               </p>
             </FadeIn>
             <FadeIn delay={0.25}>
               <p>
-                我後來才明白：困住我的，不是負債本身，是我腦袋裡那套比負債更古老的程式。
+                當我看見這個結構，不再用意志力「逼」自己睡覺，而是學會與內在和解。
+                結果神奇的事發生了：我不只自然早睡早起，困擾多年的過敏也<span className="text-primary font-semibold">不藥而癒</span>。
               </p>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <p>
-                從那一天起，我開始學習、認證、實踐，陪伴更多人走過類似的暗夜。<strong className="text-foreground">宇宙序能</strong>，就是從這裡長出來的。
-              </p>
+              <blockquote className="border border-primary/20 rounded-xl px-7 py-5 bg-primary/5 text-base text-foreground/80 italic leading-relaxed">
+                「在潛意識未被意識之前，它會支配你的人生，而你會稱之為命運。」
+                <span className="block text-right text-xs text-primary mt-3 not-italic">— 榮格</span>
+              </blockquote>
             </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Focus Areas */}
+      <section className="relative z-10 py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-3">服務領域</p>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold">我能幫你轉化的三大領域</h2>
+            </div>
+          </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {focusAreas.map((area, i) => (
+              <FadeIn key={area.title} delay={i * 0.1}>
+                <div className="p-7 border border-primary/15 rounded-2xl bg-background/60 space-y-3 text-center">
+                  <span className="text-3xl block">{area.icon}</span>
+                  <h3 className="font-serif font-bold text-lg text-primary">{area.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{area.desc}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Career Milestones */}
+      <section className="relative z-10 py-16 px-6 bg-card/20">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-10">事業歷程</p>
+          </FadeIn>
+          <div className="space-y-0">
+            {milestones.map((m, i) => (
+              <FadeIn key={m.year} delay={i * 0.07}>
+                <div className="flex gap-6 group">
+                  <div className="flex flex-col items-center">
+                    <div className="w-2.5 h-2.5 rounded-full bg-primary/60 mt-1.5 shrink-0 group-hover:bg-primary transition-colors" />
+                    {i < milestones.length - 1 && (
+                      <div className="w-px flex-1 bg-primary/15 my-1" />
+                    )}
+                  </div>
+                  <div className="pb-8">
+                    <p className="text-primary font-serif font-bold text-sm mb-1">{m.year}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{m.label}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
@@ -112,8 +239,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Brand Values */}
+      {/* Corporate Clients */}
       <section className="relative z-10 py-16 px-6 bg-card/20">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-10">
+              <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-3">服務過的企業</p>
+              <p className="text-muted-foreground text-sm">300+ 場企業健康講座，服務上百間台灣企業</p>
+            </div>
+          </FadeIn>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {clients.map((c, i) => (
+              <FadeIn key={c} delay={i * 0.06}>
+                <div className="text-center p-4 border border-primary/10 rounded-xl bg-background/40">
+                  <p className="text-sm text-muted-foreground font-medium">{c}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brand Values */}
+      <section className="relative z-10 py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">
@@ -135,6 +283,31 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Social Links */}
+      <section className="relative z-10 py-16 px-6 bg-card/20">
+        <div className="max-w-xl mx-auto text-center">
+          <FadeIn>
+            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase mb-8">追蹤 JJ 林炳騰</p>
+          </FadeIn>
+          <div className="flex flex-col gap-3">
+            {socials.map((s, i) => (
+              <FadeIn key={s.label} delay={i * 0.07}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-4 border border-primary/15 rounded-xl bg-background/60 hover:border-primary/40 hover:bg-primary/5 transition-all text-sm text-foreground/80"
+                >
+                  <span className="text-base w-6 text-center">{s.icon}</span>
+                  <span>{s.label}</span>
+                  <span className="ml-auto text-primary/40 text-xs">→</span>
+                </a>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="relative z-10 py-20 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 rounded-[100%] blur-[120px] scale-150 pointer-events-none" />
@@ -142,7 +315,8 @@ export default function AboutPage() {
           <FadeIn>
             <h2 className="text-2xl md:text-3xl font-serif font-bold">和我們一起走</h2>
             <p className="text-muted-foreground mt-4 leading-loose">
-              不論你現在在哪個起點，歡迎加入 LINE 與我們聯繫，<br />我們很期待認識你。
+              不管是頭疼、腳疼，還是心疼——<br />
+              記得找 JJ 林炳騰，你的人生普拿疼。
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
