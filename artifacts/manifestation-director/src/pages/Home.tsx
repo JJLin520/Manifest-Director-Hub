@@ -67,7 +67,8 @@ export default function Home() {
                 不是你不夠好。<br />
                 <span className="text-foreground font-semibold">是有人從來沒告訴你——你的大腦，有一套你不知道的作業系統正在運行。</span><br /><br />
                 而這套系統，決定了你的收入、你的感情、你的自我價值感——
-                <span className="text-primary font-semibold">在你完全沒有察覺的情況下。</span>
+                <span className="text-primary font-semibold">在你完全沒有察覺的情況下。</span><br /><br />
+                <span className="text-foreground font-semibold">它，就叫做潛意識。</span>
               </p>
             </div>
           </FadeIn>
