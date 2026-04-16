@@ -165,7 +165,7 @@ export default function NumerologyEventPage() {
                               <p className={`font-semibold text-sm ${isSelected ? "text-white" : "text-white/70"}`}>
                                 第 {s.sessionNumber} 場 · {f.date}
                               </p>
-                              <p className="text-white/40 text-xs mt-0.5">{f.time} 開始（共 90 分鐘）· Zoom 直播</p>
+                              <p className="text-white/40 text-xs mt-0.5">19:30 開始（共 90 分鐘）· Zoom 直播</p>
                             </div>
                             {s.isActive && (
                               <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full shrink-0">開放中</span>
