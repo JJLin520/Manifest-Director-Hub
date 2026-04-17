@@ -55,8 +55,8 @@ const otherEvents = [
     badges: ["實體活動"],
   },
   {
-    day: "TBA",
-    month: "近期",
+    day: "4人",
+    month: "開班",
     tag: "線上講座",
     highlight: false,
     title: "NLP 顯化人生｜定期講座",
@@ -69,8 +69,8 @@ const otherEvents = [
     badges: ["免費", "NLP"],
   },
   {
-    day: "TBA",
-    month: "近期",
+    day: "4人",
+    month: "開班",
     tag: "工作坊",
     highlight: false,
     title: "NLP 奧密時間線工作坊",
@@ -83,8 +83,8 @@ const otherEvents = [
     badges: ["NLP", "深度工作坊"],
   },
   {
-    day: "TBA",
-    month: "近期",
+    day: "4人",
+    month: "開班",
     tag: "免費講座",
     highlight: false,
     title: "潛意識覺醒體驗講座",
@@ -97,8 +97,8 @@ const otherEvents = [
     badges: ["免費"],
   },
   {
-    day: "TBA",
-    month: "近期",
+    day: "4人",
+    month: "開班",
     tag: "工作坊",
     highlight: false,
     title: "情緒釋放 & 心錨建立工作坊",
