@@ -346,9 +346,52 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <footer className="py-8 text-center text-muted-foreground/40 text-sm border-t border-primary/10 relative z-10">
-        © 2024 宇宙序能教育品牌 ｜ JJ 林炳騰
-      </footer>
+      {/* ── 找到我 ── */}
+      <section className="relative z-10 py-16 px-6 bg-white/2 border-t border-primary/10">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <p className="text-primary text-xs tracking-widest font-medium text-center mb-2">FIND ME</p>
+            <h2 className="font-serif text-2xl font-bold text-center mb-10">找到我</h2>
+          </FadeIn>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { icon: "▶", label: "YouTube｜人生普拿疼！", desc: "每週分享潛意識觀念、NLP 技巧與真實案例", href: "https://pse.is/YTJJLIN007" },
+              { icon: "📸", label: "Instagram @jjloveyou520", desc: "日常分享、限時動態能量語錄", href: "https://www.instagram.com/jjloveyou520/" },
+              { icon: "💬", label: "Facebook｜JJ林炳騰", desc: "直播預告、活動資訊、文章分享", href: "https://www.facebook.com/ntutraveler.lin" },
+              { icon: "🎙️", label: "Podcast｜Apple", desc: "隨時收聽潛意識與顯化的深度對話", href: "https://reurl.cc/OEj0Lg" },
+              { icon: "🎵", label: "Podcast｜Spotify", desc: "在 Spotify 訂閱，不錯過每一集", href: "https://pse.is/4m36fw" },
+              { icon: "📇", label: "電子名片", desc: "一鍵儲存 JJ 的完整聯絡資訊", href: "https://pse.is/supercardjj" },
+            ].map((item, i) => (
+              <FadeIn key={item.label} delay={i * 0.07}>
+                <a href={item.href} target="_blank" rel="noopener noreferrer"
+                  className="flex items-start gap-4 bg-white/4 border border-white/10 hover:border-primary/30 rounded-xl px-5 py-4 transition-colors group">
+                  <span className="text-xl shrink-0 mt-0.5">{item.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-medium text-sm group-hover:text-primary transition-colors">{item.label}</p>
+                    <p className="text-white/40 text-xs mt-0.5 leading-relaxed">{item.desc}</p>
+                  </div>
+                  <span className="text-white/20 group-hover:text-primary/50 text-xs mt-1 shrink-0 transition-colors">→</span>
+                </a>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* LINE 顯化共修群 highlighted */}
+          <FadeIn delay={0.4}>
+            <div className="mt-4 bg-primary/10 border border-primary/30 rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center gap-5">
+              <div className="text-3xl shrink-0">🌟</div>
+              <div className="flex-1 text-center sm:text-left">
+                <p className="text-primary font-semibold text-base">加入【JJ 顯化共修群】（完全免費）</p>
+                <p className="text-white/55 text-sm mt-1 leading-relaxed">每週一次群內能量校準，與同頻夥伴一起成長。</p>
+              </div>
+              <a href="https://line.me/R/ti/g/DIlcgURfu8" target="_blank" rel="noopener noreferrer"
+                className="shrink-0 px-6 py-2.5 bg-primary text-primary-foreground font-bold text-sm rounded-full hover:bg-primary/90 transition-colors whitespace-nowrap">
+                立即加入 →
+              </a>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
     </div>
   );
 }
