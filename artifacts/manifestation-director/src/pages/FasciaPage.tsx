@@ -116,51 +116,116 @@ export default function FasciaPage() {
                   transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
                 />
                 <div className="relative z-10 flex flex-col items-center">
-                  {/* SVG human body figure */}
-                  <svg width="160" height="300" viewBox="0 0 160 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* SVG medical skeleton */}
+                  <svg width="170" height="340" viewBox="0 0 170 340" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                      <filter id="glow">
-                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                      <filter id="xray">
+                        <feGaussianBlur stdDeviation="1.2" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                       </filter>
                     </defs>
-                    {/* Head */}
-                    <circle cx="80" cy="22" r="18" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="rgba(6,182,212,0.06)" filter="url(#glow)"/>
-                    {/* Neck */}
-                    <line x1="75" y1="39" x2="74" y2="54" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2"/>
-                    <line x1="85" y1="39" x2="86" y2="54" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2"/>
-                    {/* Shoulders */}
-                    <path d="M74 54 Q52 56 40 70" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="none"/>
-                    <path d="M86 54 Q108 56 120 70" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="none"/>
-                    {/* Shoulder markers */}
-                    <circle cx="40" cy="70" r="4" fill="rgba(6,182,212,0.3)" stroke="#06b6d4" strokeWidth="1.5" filter="url(#glow)"/>
-                    <circle cx="120" cy="70" r="4" fill="rgba(6,182,212,0.3)" stroke="#06b6d4" strokeWidth="1.5" filter="url(#glow)"/>
-                    {/* Torso outline */}
-                    <path d="M40 70 L34 140 L50 145 L80 148 L110 145 L126 140 L120 70" stroke="rgba(6,182,212,0.45)" strokeWidth="1.2" fill="rgba(6,182,212,0.03)"/>
-                    {/* Spine */}
-                    <line x1="80" y1="54" x2="80" y2="145" stroke="rgba(6,182,212,0.8)" strokeWidth="1.5" strokeDasharray="4 3" filter="url(#glow)"/>
-                    {/* Spine nodes */}
-                    {[65, 82, 100, 118, 136].map((y, i) => (
-                      <circle key={i} cx="80" cy={y} r="2.5" fill="#06b6d4" fillOpacity="0.7" filter="url(#glow)"/>
+
+                    {/* ── SKULL ── */}
+                    <ellipse cx="85" cy="26" rx="24" ry="26" stroke="rgba(160,205,225,0.9)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
+                    {/* Eye sockets */}
+                    <ellipse cx="76" cy="23" rx="6.5" ry="5" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(4,10,28,0.7)"/>
+                    <ellipse cx="94" cy="23" rx="6.5" ry="5" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(4,10,28,0.7)"/>
+                    {/* Nasal */}
+                    <path d="M83 29 L85 34 L87 29" stroke="rgba(160,205,225,0.55)" strokeWidth="0.9" fill="rgba(4,10,28,0.5)"/>
+                    {/* Mandible */}
+                    <path d="M62 35 Q62 52 74 56 L85 57 L96 56 Q108 52 108 35" stroke="rgba(160,205,225,0.85)" strokeWidth="1.3" fill="none" filter="url(#xray)"/>
+                    {/* Teeth line */}
+                    <line x1="72" y1="50" x2="98" y2="50" stroke="rgba(160,205,225,0.35)" strokeWidth="0.6"/>
+                    {/* Zygomatic */}
+                    <path d="M61 30 Q59 38 64 44" stroke="rgba(160,205,225,0.5)" strokeWidth="1" fill="none"/>
+                    <path d="M109 30 Q111 38 106 44" stroke="rgba(160,205,225,0.5)" strokeWidth="1" fill="none"/>
+
+                    {/* ── CERVICAL SPINE ── */}
+                    {[59, 64, 69, 74, 79, 84, 89].map((y, i) => (
+                      <rect key={i} x="80" y={y} width="10" height="4" rx="1.5" stroke="rgba(160,205,225,0.8)" strokeWidth="0.8" fill="rgba(160,205,225,0.05)"/>
                     ))}
-                    {/* Pelvis */}
-                    <ellipse cx="80" cy="148" rx="30" ry="10" stroke="rgba(6,182,212,0.6)" strokeWidth="1.5" fill="rgba(6,182,212,0.05)" filter="url(#glow)"/>
-                    {/* Pelvis center marker */}
-                    <circle cx="80" cy="148" r="3.5" fill="rgba(201,168,76,0.6)" stroke="#c9a84c" strokeWidth="1.5" filter="url(#glow)"/>
-                    {/* Left arm */}
-                    <path d="M40 70 L26 108 L22 138" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2" fill="none"/>
-                    {/* Right arm */}
-                    <path d="M120 70 L134 108 L138 138" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2" fill="none"/>
-                    {/* Left leg */}
-                    <path d="M60 157 L54 210 L50 265" stroke="rgba(6,182,212,0.5)" strokeWidth="1.3" fill="none"/>
-                    {/* Right leg */}
-                    <path d="M100 157 L106 210 L110 265" stroke="rgba(6,182,212,0.5)" strokeWidth="1.3" fill="none"/>
-                    {/* Fascia lines overlay */}
-                    <path d="M55 80 Q80 95 105 80" stroke="rgba(6,182,212,0.2)" strokeWidth="0.8" fill="none"/>
-                    <path d="M50 110 Q80 125 110 110" stroke="rgba(6,182,212,0.2)" strokeWidth="0.8" fill="none"/>
-                    {/* Left/right balance markers */}
-                    <line x1="34" y1="140" x2="126" y2="140" stroke="rgba(201,168,76,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
-                    <line x1="32" y1="70" x2="128" y2="70" stroke="rgba(201,168,76,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
+
+                    {/* ── CLAVICLES ── */}
+                    <path d="M85 95 Q68 90 50 84" stroke="rgba(160,205,225,0.9)" strokeWidth="2.2" fill="none" strokeLinecap="round" filter="url(#xray)"/>
+                    <path d="M85 95 Q102 90 120 84" stroke="rgba(160,205,225,0.9)" strokeWidth="2.2" fill="none" strokeLinecap="round" filter="url(#xray)"/>
+
+                    {/* ── SCAPULAE ── */}
+                    <path d="M47 85 L38 100 L50 118 L58 103 Z" stroke="rgba(160,205,225,0.55)" strokeWidth="1" fill="rgba(160,205,225,0.03)"/>
+                    <path d="M123 85 L132 100 L120 118 L112 103 Z" stroke="rgba(160,205,225,0.55)" strokeWidth="1" fill="rgba(160,205,225,0.03)"/>
+
+                    {/* ── HUMERUS ── */}
+                    <circle cx="47" cy="86" r="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
+                    <circle cx="123" cy="86" r="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
+                    <path d="M44 91 Q38 118 34 148" stroke="rgba(160,205,225,0.8)" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                    <path d="M126 91 Q132 118 136 148" stroke="rgba(160,205,225,0.8)" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                    <ellipse cx="33" cy="150" rx="5" ry="3.5" stroke="rgba(160,205,225,0.7)" strokeWidth="1" fill="rgba(160,205,225,0.05)"/>
+                    <ellipse cx="137" cy="150" rx="5" ry="3.5" stroke="rgba(160,205,225,0.7)" strokeWidth="1" fill="rgba(160,205,225,0.05)"/>
+
+                    {/* ── RADIUS & ULNA ── */}
+                    <line x1="29" y1="154" x2="23" y2="204" stroke="rgba(160,205,225,0.75)" strokeWidth="2.5" strokeLinecap="round"/>
+                    <line x1="37" y1="153" x2="33" y2="204" stroke="rgba(160,205,225,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <line x1="141" y1="154" x2="147" y2="204" stroke="rgba(160,205,225,0.75)" strokeWidth="2.5" strokeLinecap="round"/>
+                    <line x1="133" y1="153" x2="137" y2="204" stroke="rgba(160,205,225,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
+
+                    {/* ── STERNUM ── */}
+                    <rect x="81" y="95" width="8" height="55" rx="3" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(160,205,225,0.06)"/>
+
+                    {/* ── RIBS (7 pairs true, 3 false) ── */}
+                    {[
+                      { y: 99,  w: 24 },
+                      { y: 106, w: 28 },
+                      { y: 113, w: 30 },
+                      { y: 120, w: 31 },
+                      { y: 127, w: 31 },
+                      { y: 134, w: 29 },
+                      { y: 140, w: 26 },
+                    ].map((r, i) => (
+                      <g key={i}>
+                        <path d={`M81 ${r.y} Q${85 - r.w} ${r.y - 4} ${50 - i} ${r.y + 4}`} stroke="rgba(160,205,225,0.65)" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+                        <path d={`M89 ${r.y} Q${85 + r.w} ${r.y - 4} ${120 + i} ${r.y + 4}`} stroke="rgba(160,205,225,0.65)" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+                      </g>
+                    ))}
+                    {/* False ribs */}
+                    <path d="M81 147 Q52 152 46 160" stroke="rgba(160,205,225,0.45)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+                    <path d="M89 147 Q118 152 124 160" stroke="rgba(160,205,225,0.45)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+                    <path d="M81 153 Q49 158 43 167" stroke="rgba(160,205,225,0.35)" strokeWidth="1" fill="none" strokeLinecap="round"/>
+                    <path d="M89 153 Q121 158 127 167" stroke="rgba(160,205,225,0.35)" strokeWidth="1" fill="none" strokeLinecap="round"/>
+
+                    {/* ── THORACIC + LUMBAR SPINE ── */}
+                    {[96, 102, 108, 114, 120, 126, 132, 138, 144, 150, 157, 164, 172, 180, 188, 196, 204].map((y, i) => {
+                      const isLumbar = i >= 12;
+                      const w = isLumbar ? 13 : 10;
+                      return <rect key={i} x={85 - w / 2} y={y} width={w} height={5} rx="1.2" stroke={`rgba(160,205,225,${isLumbar ? 0.88 : 0.72})`} strokeWidth="0.8" fill={`rgba(160,205,225,${isLumbar ? 0.07 : 0.03})`}/>;
+                    })}
+
+                    {/* ── PELVIS ── */}
+                    <path d="M84 210 Q60 207 48 222 Q40 234 52 247 Q62 256 74 252 Q82 249 86 242 L85 235 L85 228 L85 222 Q85 215 84 210Z" stroke="rgba(160,205,225,0.82)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
+                    <path d="M86 210 Q110 207 122 222 Q130 234 118 247 Q108 256 96 252 Q88 249 84 242 L85 235 L85 228 L85 222 Q85 215 86 210Z" stroke="rgba(160,205,225,0.82)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
+                    {/* Sacrum */}
+                    <path d="M80 208 L80 225 Q85 230 90 225 L90 208 Q87 212 85 212 Q83 212 80 208Z" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(160,205,225,0.06)"/>
+                    {/* Acetabulum (hip sockets) */}
+                    <circle cx="57" cy="240" r="9" stroke="rgba(160,205,225,0.75)" strokeWidth="1.3" fill="rgba(4,10,28,0.5)"/>
+                    <circle cx="113" cy="240" r="9" stroke="rgba(160,205,225,0.75)" strokeWidth="1.3" fill="rgba(4,10,28,0.5)"/>
+
+                    {/* ── FEMUR ── */}
+                    <circle cx="55" cy="237" r="6" stroke="rgba(160,205,225,0.85)" strokeWidth="1.2" fill="rgba(160,205,225,0.12)"/>
+                    <path d="M53 243 Q56 268 60 302" stroke="rgba(160,205,225,0.85)" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
+                    <circle cx="115" cy="237" r="6" stroke="rgba(160,205,225,0.85)" strokeWidth="1.2" fill="rgba(160,205,225,0.12)"/>
+                    <path d="M117 243 Q114 268 110 302" stroke="rgba(160,205,225,0.85)" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
+
+                    {/* ── PATELLA ── */}
+                    <ellipse cx="59" cy="304" rx="6" ry="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
+                    <ellipse cx="111" cy="304" rx="6" ry="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
+
+                    {/* ── TIBIA & FIBULA ── */}
+                    <path d="M57 309 L55 338" stroke="rgba(160,205,225,0.85)" strokeWidth="4" strokeLinecap="round"/>
+                    <path d="M65 311 L65 336" stroke="rgba(160,205,225,0.65)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M113 309 L115 338" stroke="rgba(160,205,225,0.85)" strokeWidth="4" strokeLinecap="round"/>
+                    <path d="M105 311 L105 336" stroke="rgba(160,205,225,0.65)" strokeWidth="1.5" strokeLinecap="round"/>
+
+                    {/* ── MEASUREMENT LINES (gold) ── */}
+                    <line x1="37" y1="84" x2="133" y2="84" stroke="rgba(201,168,76,0.3)" strokeWidth="0.7" strokeDasharray="3 4"/>
+                    <line x1="40" y1="240" x2="130" y2="240" stroke="rgba(201,168,76,0.3)" strokeWidth="0.7" strokeDasharray="3 4"/>
                   </svg>
 
                   {/* Label tags floating alongside */}
