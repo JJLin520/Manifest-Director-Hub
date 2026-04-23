@@ -438,9 +438,7 @@ function ResultSection({ result, onReset }: {
       <FadeIn delay={0.35}>
         <div className="space-y-3 text-center">
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeSdX8QoS0ABM0hcuaknX1vCpVTyPTVyczvEma3PYonyF1IBw/viewform"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/lecture"
             className="block w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 hover:scale-[1.02] transition-all text-sm shadow-[0_0_25px_rgba(230,175,50,0.25)]"
           >
             立即報名線上講座 →
