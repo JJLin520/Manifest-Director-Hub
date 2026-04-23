@@ -104,22 +104,95 @@ export default function FasciaPage() {
               </div>
             </motion.div>
 
-            {/* Body illustration placeholder */}
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }}
+            {/* Body illustration — SVG human scan */}
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }}
               className="hidden md:flex items-center justify-center">
-              <div className="relative w-72 h-80 rounded-2xl bg-gradient-to-b from-cyan-900/20 to-[#080d1a] border border-cyan-500/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(6,182,212,0.12)_0%,_transparent_70%)]" />
-                <div className="text-center relative z-10">
-                  <div className="text-8xl mb-4 opacity-80">🫀</div>
-                  <div className="space-y-2">
-                    {["脊椎曲度", "骨盆平衡", "肩膀高低差", "肌肉張力", "筋膜沾黏"].map((t, i) => (
-                      <motion.div key={t}
-                        initial={{ opacity: 0, x: -10 }}
+              <div className="relative w-72 h-96 rounded-2xl bg-gradient-to-b from-cyan-900/15 to-[#060c1a] border border-cyan-500/20 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_rgba(6,182,212,0.10)_0%,_transparent_65%)]" />
+                {/* Scan line animation */}
+                <motion.div
+                  className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent z-20 pointer-events-none"
+                  animate={{ top: ["10%", "90%", "10%"] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+                />
+                <div className="relative z-10 flex flex-col items-center">
+                  {/* SVG human body figure */}
+                  <svg width="160" height="300" viewBox="0 0 160 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                      </filter>
+                    </defs>
+                    {/* Head */}
+                    <circle cx="80" cy="22" r="18" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="rgba(6,182,212,0.06)" filter="url(#glow)"/>
+                    {/* Neck */}
+                    <line x1="75" y1="39" x2="74" y2="54" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2"/>
+                    <line x1="85" y1="39" x2="86" y2="54" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2"/>
+                    {/* Shoulders */}
+                    <path d="M74 54 Q52 56 40 70" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="none"/>
+                    <path d="M86 54 Q108 56 120 70" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5" fill="none"/>
+                    {/* Shoulder markers */}
+                    <circle cx="40" cy="70" r="4" fill="rgba(6,182,212,0.3)" stroke="#06b6d4" strokeWidth="1.5" filter="url(#glow)"/>
+                    <circle cx="120" cy="70" r="4" fill="rgba(6,182,212,0.3)" stroke="#06b6d4" strokeWidth="1.5" filter="url(#glow)"/>
+                    {/* Torso outline */}
+                    <path d="M40 70 L34 140 L50 145 L80 148 L110 145 L126 140 L120 70" stroke="rgba(6,182,212,0.45)" strokeWidth="1.2" fill="rgba(6,182,212,0.03)"/>
+                    {/* Spine */}
+                    <line x1="80" y1="54" x2="80" y2="145" stroke="rgba(6,182,212,0.8)" strokeWidth="1.5" strokeDasharray="4 3" filter="url(#glow)"/>
+                    {/* Spine nodes */}
+                    {[65, 82, 100, 118, 136].map((y, i) => (
+                      <circle key={i} cx="80" cy={y} r="2.5" fill="#06b6d4" fillOpacity="0.7" filter="url(#glow)"/>
+                    ))}
+                    {/* Pelvis */}
+                    <ellipse cx="80" cy="148" rx="30" ry="10" stroke="rgba(6,182,212,0.6)" strokeWidth="1.5" fill="rgba(6,182,212,0.05)" filter="url(#glow)"/>
+                    {/* Pelvis center marker */}
+                    <circle cx="80" cy="148" r="3.5" fill="rgba(201,168,76,0.6)" stroke="#c9a84c" strokeWidth="1.5" filter="url(#glow)"/>
+                    {/* Left arm */}
+                    <path d="M40 70 L26 108 L22 138" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2" fill="none"/>
+                    {/* Right arm */}
+                    <path d="M120 70 L134 108 L138 138" stroke="rgba(6,182,212,0.5)" strokeWidth="1.2" fill="none"/>
+                    {/* Left leg */}
+                    <path d="M60 157 L54 210 L50 265" stroke="rgba(6,182,212,0.5)" strokeWidth="1.3" fill="none"/>
+                    {/* Right leg */}
+                    <path d="M100 157 L106 210 L110 265" stroke="rgba(6,182,212,0.5)" strokeWidth="1.3" fill="none"/>
+                    {/* Fascia lines overlay */}
+                    <path d="M55 80 Q80 95 105 80" stroke="rgba(6,182,212,0.2)" strokeWidth="0.8" fill="none"/>
+                    <path d="M50 110 Q80 125 110 110" stroke="rgba(6,182,212,0.2)" strokeWidth="0.8" fill="none"/>
+                    {/* Left/right balance markers */}
+                    <line x1="34" y1="140" x2="126" y2="140" stroke="rgba(201,168,76,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
+                    <line x1="32" y1="70" x2="128" y2="70" stroke="rgba(201,168,76,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
+                  </svg>
+
+                  {/* Label tags floating alongside */}
+                  <div className="absolute left-0 top-12 space-y-6 -translate-x-1">
+                    {[
+                      { y: "top-10", label: "肩膀高低差" },
+                      { y: "top-24", label: "脊椎曲度" },
+                      { y: "top-40", label: "骨盆平衡" },
+                    ].map((t, i) => (
+                      <motion.div key={t.label}
+                        initial={{ opacity: 0, x: -8 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 + i * 0.15 }}
-                        className="flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 rounded-lg px-3 py-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                        <span className="text-cyan-300 text-xs">{t}</span>
+                        transition={{ delay: 0.8 + i * 0.2 }}
+                        className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-md px-2.5 py-1">
+                        <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />
+                        <span className="text-cyan-300 text-[10px] whitespace-nowrap">{t.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="absolute right-0 top-12 space-y-6 translate-x-1">
+                    {[
+                      { label: "筋膜沾黏" },
+                      { label: "肌肉張力" },
+                      { label: "左右平衡" },
+                    ].map((t, i) => (
+                      <motion.div key={t.label}
+                        initial={{ opacity: 0, x: 8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0 + i * 0.2 }}
+                        className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-md px-2.5 py-1">
+                        <span className="text-cyan-300 text-[10px] whitespace-nowrap">{t.label}</span>
+                        <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />
                       </motion.div>
                     ))}
                   </div>
