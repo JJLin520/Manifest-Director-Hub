@@ -122,152 +122,101 @@ export default function FasciaPage() {
                   animate={{ top: ["5%", "95%", "5%"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 />
-                <div className="relative z-10 flex flex-col items-center">
-                  {/* SVG medical skeleton */}
-                  <svg width="170" height="340" viewBox="0 0 170 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <filter id="xray">
-                        <feGaussianBlur stdDeviation="1.2" result="blur"/>
-                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                      </filter>
-                    </defs>
+                {/* Body scan image */}
+                <img
+                  src="/body-scan.png"
+                  alt="AI 身體掃描示意"
+                  className="absolute inset-0 w-full h-full object-cover object-center opacity-80 mix-blend-screen z-10"
+                />
 
-                    {/* ── SKULL ── */}
-                    <ellipse cx="85" cy="26" rx="24" ry="26" stroke="rgba(160,205,225,0.9)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
-                    {/* Eye sockets */}
-                    <ellipse cx="76" cy="23" rx="6.5" ry="5" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(4,10,28,0.7)"/>
-                    <ellipse cx="94" cy="23" rx="6.5" ry="5" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(4,10,28,0.7)"/>
-                    {/* Nasal */}
-                    <path d="M83 29 L85 34 L87 29" stroke="rgba(160,205,225,0.55)" strokeWidth="0.9" fill="rgba(4,10,28,0.5)"/>
-                    {/* Mandible */}
-                    <path d="M62 35 Q62 52 74 56 L85 57 L96 56 Q108 52 108 35" stroke="rgba(160,205,225,0.85)" strokeWidth="1.3" fill="none" filter="url(#xray)"/>
-                    {/* Teeth line */}
-                    <line x1="72" y1="50" x2="98" y2="50" stroke="rgba(160,205,225,0.35)" strokeWidth="0.6"/>
-                    {/* Zygomatic */}
-                    <path d="M61 30 Q59 38 64 44" stroke="rgba(160,205,225,0.5)" strokeWidth="1" fill="none"/>
-                    <path d="M109 30 Q111 38 106 44" stroke="rgba(160,205,225,0.5)" strokeWidth="1" fill="none"/>
+                {/* Scan frame corners */}
+                <svg className="absolute inset-0 w-full h-full z-20 pointer-events-none" viewBox="0 0 288 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Top-left corner bracket */}
+                  <path d="M20 50 L20 20 L60 20" stroke="rgba(6,182,212,0.85)" strokeWidth="2" strokeLinecap="round"/>
+                  {/* Top-right corner bracket */}
+                  <path d="M268 50 L268 20 L228 20" stroke="rgba(6,182,212,0.85)" strokeWidth="2" strokeLinecap="round"/>
+                  {/* Bottom-left corner bracket */}
+                  <path d="M20 390 L20 420 L60 420" stroke="rgba(6,182,212,0.85)" strokeWidth="2" strokeLinecap="round"/>
+                  {/* Bottom-right corner bracket */}
+                  <path d="M268 390 L268 420 L228 420" stroke="rgba(6,182,212,0.85)" strokeWidth="2" strokeLinecap="round"/>
 
-                    {/* ── CERVICAL SPINE ── */}
-                    {[59, 64, 69, 74, 79, 84, 89].map((y, i) => (
-                      <rect key={i} x="80" y={y} width="10" height="4" rx="1.5" stroke="rgba(160,205,225,0.8)" strokeWidth="0.8" fill="rgba(160,205,225,0.05)"/>
-                    ))}
+                  {/* Top center calibration bar */}
+                  <rect x="114" y="12" width="60" height="6" rx="2" stroke="rgba(6,182,212,0.7)" strokeWidth="1" fill="rgba(6,182,212,0.1)"/>
+                  <line x1="144" y1="8" x2="144" y2="12" stroke="rgba(6,182,212,0.7)" strokeWidth="1.5"/>
 
-                    {/* ── CLAVICLES ── */}
-                    <path d="M85 95 Q68 90 50 84" stroke="rgba(160,205,225,0.9)" strokeWidth="2.2" fill="none" strokeLinecap="round" filter="url(#xray)"/>
-                    <path d="M85 95 Q102 90 120 84" stroke="rgba(160,205,225,0.9)" strokeWidth="2.2" fill="none" strokeLinecap="round" filter="url(#xray)"/>
+                  {/* Shoulder level measurement bracket (left) */}
+                  <rect x="16" y="148" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.65)" strokeWidth="1" fill="rgba(6,182,212,0.08)"/>
+                  <line x1="36" y1="152" x2="80" y2="152" stroke="rgba(6,182,212,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
+                  {/* Shoulder level measurement bracket (right) */}
+                  <rect x="252" y="148" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.65)" strokeWidth="1" fill="rgba(6,182,212,0.08)"/>
+                  <line x1="252" y1="152" x2="208" y2="152" stroke="rgba(6,182,212,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
 
-                    {/* ── SCAPULAE ── */}
-                    <path d="M47 85 L38 100 L50 118 L58 103 Z" stroke="rgba(160,205,225,0.55)" strokeWidth="1" fill="rgba(160,205,225,0.03)"/>
-                    <path d="M123 85 L132 100 L120 118 L112 103 Z" stroke="rgba(160,205,225,0.55)" strokeWidth="1" fill="rgba(160,205,225,0.03)"/>
+                  {/* Pelvis level measurement bracket (left) */}
+                  <rect x="16" y="270" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.65)" strokeWidth="1" fill="rgba(6,182,212,0.08)"/>
+                  <line x1="36" y1="274" x2="90" y2="274" stroke="rgba(6,182,212,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
+                  {/* Pelvis level measurement bracket (right) */}
+                  <rect x="252" y="270" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.65)" strokeWidth="1" fill="rgba(6,182,212,0.08)"/>
+                  <line x1="252" y1="274" x2="198" y2="274" stroke="rgba(6,182,212,0.35)" strokeWidth="0.8" strokeDasharray="3 3"/>
 
-                    {/* ── HUMERUS ── */}
-                    <circle cx="47" cy="86" r="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
-                    <circle cx="123" cy="86" r="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
-                    <path d="M44 91 Q38 118 34 148" stroke="rgba(160,205,225,0.8)" strokeWidth="4" strokeLinecap="round" fill="none"/>
-                    <path d="M126 91 Q132 118 136 148" stroke="rgba(160,205,225,0.8)" strokeWidth="4" strokeLinecap="round" fill="none"/>
-                    <ellipse cx="33" cy="150" rx="5" ry="3.5" stroke="rgba(160,205,225,0.7)" strokeWidth="1" fill="rgba(160,205,225,0.05)"/>
-                    <ellipse cx="137" cy="150" rx="5" ry="3.5" stroke="rgba(160,205,225,0.7)" strokeWidth="1" fill="rgba(160,205,225,0.05)"/>
+                  {/* Knee level measurement bracket (left) */}
+                  <rect x="16" y="358" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.5)" strokeWidth="1" fill="rgba(6,182,212,0.06)"/>
+                  <line x1="36" y1="362" x2="96" y2="362" stroke="rgba(6,182,212,0.25)" strokeWidth="0.8" strokeDasharray="3 3"/>
+                  {/* Knee level measurement bracket (right) */}
+                  <rect x="252" y="358" width="20" height="8" rx="2" stroke="rgba(6,182,212,0.5)" strokeWidth="1" fill="rgba(6,182,212,0.06)"/>
+                  <line x1="252" y1="362" x2="192" y2="362" stroke="rgba(6,182,212,0.25)" strokeWidth="0.8" strokeDasharray="3 3"/>
 
-                    {/* ── RADIUS & ULNA ── */}
-                    <line x1="29" y1="154" x2="23" y2="204" stroke="rgba(160,205,225,0.75)" strokeWidth="2.5" strokeLinecap="round"/>
-                    <line x1="37" y1="153" x2="33" y2="204" stroke="rgba(160,205,225,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="141" y1="154" x2="147" y2="204" stroke="rgba(160,205,225,0.75)" strokeWidth="2.5" strokeLinecap="round"/>
-                    <line x1="133" y1="153" x2="137" y2="204" stroke="rgba(160,205,225,0.6)" strokeWidth="1.5" strokeLinecap="round"/>
+                  {/* Node dots at key anatomy points */}
+                  {/* Head */}
+                  <circle cx="144" cy="72" r="4" fill="rgba(6,182,212,0.9)" filter="url(#nodeglow)"/>
+                  {/* Left shoulder */}
+                  <circle cx="76" cy="152" r="5" fill="rgba(6,182,212,0.85)" filter="url(#nodeglow)"/>
+                  {/* Right shoulder */}
+                  <circle cx="212" cy="152" r="5" fill="rgba(6,182,212,0.85)" filter="url(#nodeglow)"/>
+                  {/* Spine mid */}
+                  <circle cx="144" cy="220" r="3.5" fill="rgba(6,182,212,0.7)"/>
+                  {/* Left hip */}
+                  <circle cx="100" cy="274" r="4.5" fill="rgba(6,182,212,0.8)" filter="url(#nodeglow)"/>
+                  {/* Right hip */}
+                  <circle cx="188" cy="274" r="4.5" fill="rgba(6,182,212,0.8)" filter="url(#nodeglow)"/>
+                  {/* Left knee */}
+                  <circle cx="108" cy="362" r="4" fill="rgba(6,182,212,0.7)"/>
+                  {/* Right knee */}
+                  <circle cx="180" cy="362" r="4" fill="rgba(6,182,212,0.7)"/>
 
-                    {/* ── STERNUM ── */}
-                    <rect x="81" y="95" width="8" height="55" rx="3" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(160,205,225,0.06)"/>
+                  <defs>
+                    <filter id="nodeglow">
+                      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                  </defs>
+                </svg>
 
-                    {/* ── RIBS (7 pairs true, 3 false) ── */}
-                    {[
-                      { y: 99,  w: 24 },
-                      { y: 106, w: 28 },
-                      { y: 113, w: 30 },
-                      { y: 120, w: 31 },
-                      { y: 127, w: 31 },
-                      { y: 134, w: 29 },
-                      { y: 140, w: 26 },
-                    ].map((r, i) => (
-                      <g key={i}>
-                        <path d={`M81 ${r.y} Q${85 - r.w} ${r.y - 4} ${50 - i} ${r.y + 4}`} stroke="rgba(160,205,225,0.65)" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-                        <path d={`M89 ${r.y} Q${85 + r.w} ${r.y - 4} ${120 + i} ${r.y + 4}`} stroke="rgba(160,205,225,0.65)" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-                      </g>
-                    ))}
-                    {/* False ribs */}
-                    <path d="M81 147 Q52 152 46 160" stroke="rgba(160,205,225,0.45)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-                    <path d="M89 147 Q118 152 124 160" stroke="rgba(160,205,225,0.45)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-                    <path d="M81 153 Q49 158 43 167" stroke="rgba(160,205,225,0.35)" strokeWidth="1" fill="none" strokeLinecap="round"/>
-                    <path d="M89 153 Q121 158 127 167" stroke="rgba(160,205,225,0.35)" strokeWidth="1" fill="none" strokeLinecap="round"/>
+                {/* Floating labels left */}
+                <div className="absolute left-2 top-0 bottom-0 flex flex-col justify-around py-16 z-40">
+                  {["肩膀高低差", "脊椎曲度", "骨盆平衡"].map((label, i) => (
+                    <motion.div key={label}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + i * 0.25 }}
+                      className="flex items-center gap-1.5 bg-[#050d17]/80 border border-cyan-500/30 rounded px-2 py-1 backdrop-blur-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                      <span className="text-cyan-300 text-[10px] whitespace-nowrap">{label}</span>
+                    </motion.div>
+                  ))}
+                </div>
 
-                    {/* ── THORACIC + LUMBAR SPINE ── */}
-                    {[96, 102, 108, 114, 120, 126, 132, 138, 144, 150, 157, 164, 172, 180, 188, 196, 204].map((y, i) => {
-                      const isLumbar = i >= 12;
-                      const w = isLumbar ? 13 : 10;
-                      return <rect key={i} x={85 - w / 2} y={y} width={w} height={5} rx="1.2" stroke={`rgba(160,205,225,${isLumbar ? 0.88 : 0.72})`} strokeWidth="0.8" fill={`rgba(160,205,225,${isLumbar ? 0.07 : 0.03})`}/>;
-                    })}
-
-                    {/* ── PELVIS ── */}
-                    <path d="M84 210 Q60 207 48 222 Q40 234 52 247 Q62 256 74 252 Q82 249 86 242 L85 235 L85 228 L85 222 Q85 215 84 210Z" stroke="rgba(160,205,225,0.82)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
-                    <path d="M86 210 Q110 207 122 222 Q130 234 118 247 Q108 256 96 252 Q88 249 84 242 L85 235 L85 228 L85 222 Q85 215 86 210Z" stroke="rgba(160,205,225,0.82)" strokeWidth="1.4" fill="rgba(160,205,225,0.04)" filter="url(#xray)"/>
-                    {/* Sacrum */}
-                    <path d="M80 208 L80 225 Q85 230 90 225 L90 208 Q87 212 85 212 Q83 212 80 208Z" stroke="rgba(160,205,225,0.75)" strokeWidth="1" fill="rgba(160,205,225,0.06)"/>
-                    {/* Acetabulum (hip sockets) */}
-                    <circle cx="57" cy="240" r="9" stroke="rgba(160,205,225,0.75)" strokeWidth="1.3" fill="rgba(4,10,28,0.5)"/>
-                    <circle cx="113" cy="240" r="9" stroke="rgba(160,205,225,0.75)" strokeWidth="1.3" fill="rgba(4,10,28,0.5)"/>
-
-                    {/* ── FEMUR ── */}
-                    <circle cx="55" cy="237" r="6" stroke="rgba(160,205,225,0.85)" strokeWidth="1.2" fill="rgba(160,205,225,0.12)"/>
-                    <path d="M53 243 Q56 268 60 302" stroke="rgba(160,205,225,0.85)" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-                    <circle cx="115" cy="237" r="6" stroke="rgba(160,205,225,0.85)" strokeWidth="1.2" fill="rgba(160,205,225,0.12)"/>
-                    <path d="M117 243 Q114 268 110 302" stroke="rgba(160,205,225,0.85)" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-
-                    {/* ── PATELLA ── */}
-                    <ellipse cx="59" cy="304" rx="6" ry="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
-                    <ellipse cx="111" cy="304" rx="6" ry="5" stroke="rgba(160,205,225,0.8)" strokeWidth="1.2" fill="rgba(160,205,225,0.08)"/>
-
-                    {/* ── TIBIA & FIBULA ── */}
-                    <path d="M57 309 L55 338" stroke="rgba(160,205,225,0.85)" strokeWidth="4" strokeLinecap="round"/>
-                    <path d="M65 311 L65 336" stroke="rgba(160,205,225,0.65)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M113 309 L115 338" stroke="rgba(160,205,225,0.85)" strokeWidth="4" strokeLinecap="round"/>
-                    <path d="M105 311 L105 336" stroke="rgba(160,205,225,0.65)" strokeWidth="1.5" strokeLinecap="round"/>
-
-                    {/* ── MEASUREMENT LINES (gold) ── */}
-                    <line x1="37" y1="84" x2="133" y2="84" stroke="rgba(201,168,76,0.3)" strokeWidth="0.7" strokeDasharray="3 4"/>
-                    <line x1="40" y1="240" x2="130" y2="240" stroke="rgba(201,168,76,0.3)" strokeWidth="0.7" strokeDasharray="3 4"/>
-                  </svg>
-
-                  {/* Label tags floating alongside */}
-                  <div className="absolute left-0 top-12 space-y-6 -translate-x-1">
-                    {[
-                      { y: "top-10", label: "肩膀高低差" },
-                      { y: "top-24", label: "脊椎曲度" },
-                      { y: "top-40", label: "骨盆平衡" },
-                    ].map((t, i) => (
-                      <motion.div key={t.label}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 + i * 0.2 }}
-                        className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-md px-2.5 py-1">
-                        <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />
-                        <span className="text-cyan-300 text-[10px] whitespace-nowrap">{t.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="absolute right-0 top-12 space-y-6 translate-x-1">
-                    {[
-                      { label: "筋膜沾黏" },
-                      { label: "肌肉張力" },
-                      { label: "左右平衡" },
-                    ].map((t, i) => (
-                      <motion.div key={t.label}
-                        initial={{ opacity: 0, x: 8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.0 + i * 0.2 }}
-                        className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-md px-2.5 py-1">
-                        <span className="text-cyan-300 text-[10px] whitespace-nowrap">{t.label}</span>
-                        <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0" />
-                      </motion.div>
-                    ))}
-                  </div>
+                {/* Floating labels right */}
+                <div className="absolute right-2 top-0 bottom-0 flex flex-col justify-around py-16 z-40">
+                  {["筋膜沾黏", "肌肉張力", "左右平衡"].map((label, i) => (
+                    <motion.div key={label}
+                      initial={{ opacity: 0, x: 8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.0 + i * 0.25 }}
+                      className="flex items-center gap-1.5 bg-[#050d17]/80 border border-cyan-500/30 rounded px-2 py-1 backdrop-blur-sm">
+                      <span className="text-cyan-300 text-[10px] whitespace-nowrap">{label}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </motion.div>
