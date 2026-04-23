@@ -59,13 +59,11 @@ const sections = [
 export default function BrandHome() {
   return (
     <div className="bg-background text-foreground font-sans min-h-screen pt-16">
-
       {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[150px]" />
       </div>
-
       {/* Hero */}
       <section className="relative z-10 min-h-[85vh] flex items-center justify-center px-6 py-24 text-center">
         <div className="max-w-3xl mx-auto space-y-8">
@@ -73,7 +71,7 @@ export default function BrandHome() {
             <p className="text-xs tracking-[0.4em] text-primary/60 uppercase">宇宙序能教育品牌</p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="text-5xl md:text-7xl font-serif font-bold leading-tight">
+            <h1 className="md:text-7xl font-serif font-bold text-[49px]">
               顯化導演系統
             </h1>
           </FadeIn>
@@ -106,7 +104,6 @@ export default function BrandHome() {
           </FadeIn>
         </div>
       </section>
-
       {/* 4 Section Cards */}
       <section className="relative z-10 py-20 px-6 bg-card/20">
         <div className="max-w-5xl mx-auto">
@@ -145,7 +142,6 @@ export default function BrandHome() {
           </div>
         </div>
       </section>
-
       {/* Brand Values */}
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -166,7 +162,6 @@ export default function BrandHome() {
           </div>
         </div>
       </section>
-
       {/* Final CTA */}
       <section className="relative z-10 py-20 px-6 bg-card/20 overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 rounded-[100%] blur-[120px] scale-150 pointer-events-none" />
@@ -203,7 +198,6 @@ export default function BrandHome() {
           </FadeIn>
         </div>
       </section>
-
       <footer className="py-8 text-center text-muted-foreground/40 text-sm border-t border-primary/10 relative z-10">
         © 2024 宇宙序能教育品牌 ｜ JJ 林炳騰
       </footer>

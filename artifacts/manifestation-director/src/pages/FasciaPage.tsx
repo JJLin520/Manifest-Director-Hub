@@ -104,16 +104,23 @@ export default function FasciaPage() {
               </div>
             </motion.div>
 
-            {/* Body illustration — SVG human scan */}
+            {/* Body illustration — holographic body scan */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }}
               className="hidden md:flex items-center justify-center">
-              <div className="relative w-72 h-96 rounded-2xl bg-gradient-to-b from-cyan-900/15 to-[#060c1a] border border-cyan-500/20 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_rgba(6,182,212,0.10)_0%,_transparent_65%)]" />
+              <div className="relative w-72 h-[440px] rounded-2xl bg-[#050d17] border border-cyan-500/25 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,_rgba(6,182,212,0.08)_0%,_transparent_70%)]" />
+
                 {/* Scan line animation */}
                 <motion.div
-                  className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent z-20 pointer-events-none"
-                  animate={{ top: ["10%", "90%", "10%"] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+                  className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent z-30 pointer-events-none"
+                  animate={{ top: ["5%", "95%", "5%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
+                {/* Scan line glow trail */}
+                <motion.div
+                  className="absolute left-0 right-0 h-8 bg-gradient-to-b from-cyan-400/10 to-transparent z-30 pointer-events-none"
+                  animate={{ top: ["5%", "95%", "5%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 />
                 <div className="relative z-10 flex flex-col items-center">
                   {/* SVG medical skeleton */}
