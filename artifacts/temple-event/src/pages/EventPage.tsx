@@ -228,11 +228,9 @@ export default function EventPage() {
             <div className="bg-white border border-border rounded-2xl p-6 space-y-3">
               <p className="text-xs tracking-widest text-primary/70 uppercase">費用說明</p>
               <div className="space-y-2 text-sm text-foreground">
-                <p>✨ 已點「雲陽祈願心燈」：<strong>免費入席</strong></p>
-                <p>🙏 一般大眾：<strong>隨喜奉獻</strong></p>
-                <p>🪔 現場點一盞燈：<strong>$1,200</strong></p>
+                <p className="text-2xl font-serif font-bold text-primary">隨喜</p>
+                <p className="text-xs text-muted-foreground">量力而為，以誠心赴會即可。</p>
               </div>
-              <p className="text-xs text-muted-foreground pt-1">隨喜即量力而為，歡迎以誠心赴會。</p>
             </div>
           </div>
           <p className="mt-4 text-sm text-center text-muted-foreground">
@@ -309,12 +307,12 @@ export default function EventPage() {
             </Field>
 
             {/* 5. 是否點燈 */}
-            <Field label="請問您目前是否有點「雲陽祈願心燈」？" required hint="此題協助我們確認您的費用身份。">
+            <Field label="請問您目前是否有點「雲陽祈願心燈」？" required hint="此題協助我們了解您的參與狀況。">
               <div className="space-y-3">
                 {[
-                  { value: "yes_free", label: "是（本次茶會免費入席）" },
-                  { value: "no_dana", label: "否（隨喜奉獻，量力而為）" },
-                  { value: "onsite_lantern", label: "現場點一盞燈 $1,200" },
+                  { value: "yes", label: "是" },
+                  { value: "no", label: "否" },
+                  { value: "onsite_lantern", label: "預計現場點燈" },
                 ].map(opt => (
                   <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
                     <input
