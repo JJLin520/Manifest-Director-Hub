@@ -165,6 +165,54 @@ export default function EventPage() {
         </div>
       </section>
 
+      {/* 孝親奉茶活動 */}
+      <section className="py-16 px-6 bg-[hsl(150,20%,97%)] border-y border-[hsl(150,20%,88%)]">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-10 space-y-2">
+            <p className="text-xs tracking-[0.3em] text-primary/60 uppercase">特色活動</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
+              🍵 孝親奉茶
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              一杯茶，獻給您最想感謝的那個人。
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-[hsl(150,20%,85%)] overflow-hidden shadow-sm">
+            <div className="bg-gradient-to-r from-[hsl(150,30%,22%)] to-[hsl(150,25%,32%)] px-8 py-5 text-white">
+              <h3 className="font-serif text-lg font-bold">孝親奉茶儀式</h3>
+              <p className="text-white/70 text-sm mt-1">Mother's Day 限定 · 現場進行</p>
+            </div>
+            <div className="p-8 space-y-6">
+              <p className="text-muted-foreground leading-loose">
+                在茶禪會中，我們特別安排一段寧靜而真摯的時光——<strong className="text-foreground">「孝親奉茶」</strong>。邀請您親手為在場的父母或長輩，沏上一盞香茶，躬身奉上，用這個最簡單卻最有力量的動作，道一聲遲來或從未說出口的感謝。
+              </p>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {[
+                  { icon: "🌿", title: "選茗備茶", desc: "由師父引導，挑選適合長輩的茶葉，靜心備茶。" },
+                  { icon: "🫖", title: "親手沏泡", desc: "學習簡單的茶道手法，以清淨之心沏好每一杯。" },
+                  { icon: "🙏", title: "躬身奉上", desc: "雙手奉茶，一鞠躬，讓愛與感恩在這一刻流動。" },
+                ].map(item => (
+                  <div key={item.title} className="text-center space-y-2 p-4 rounded-xl bg-[hsl(150,20%,97%)]">
+                    <div className="text-3xl">{item.icon}</div>
+                    <p className="font-semibold text-sm text-foreground">{item.title}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-l-4 border-primary/30 pl-4 py-1">
+                <p className="text-sm text-muted-foreground italic leading-relaxed">
+                  「父母在，人生尚有來處。」茶未涼時，讓我們把握這份相聚的溫度。
+                </p>
+              </div>
+              <p className="text-xs text-center text-muted-foreground">
+                ✦ 歡迎攜帶父母、長輩共同出席，感受這份傳統禮儀的溫柔力量。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Info Cards */}
       <section className="py-12 px-6 bg-background">
         <div className="max-w-2xl mx-auto">
@@ -181,9 +229,10 @@ export default function EventPage() {
               <p className="text-xs tracking-widest text-primary/70 uppercase">費用說明</p>
               <div className="space-y-2 text-sm text-foreground">
                 <p>✨ 已點「雲陽祈願心燈」：<strong>免費入席</strong></p>
-                <p>✨ 一般大眾：<strong>$500</strong></p>
+                <p>🙏 一般大眾：<strong>隨喜奉獻</strong></p>
                 <p>🪔 現場點一盞燈：<strong>$1,200</strong></p>
               </div>
+              <p className="text-xs text-muted-foreground pt-1">隨喜即量力而為，歡迎以誠心赴會。</p>
             </div>
           </div>
           <p className="mt-4 text-sm text-center text-muted-foreground">
@@ -264,7 +313,7 @@ export default function EventPage() {
               <div className="space-y-3">
                 {[
                   { value: "yes_free", label: "是（本次茶會免費入席）" },
-                  { value: "no_paid", label: "否（現場酌收費用 $500）" },
+                  { value: "no_dana", label: "否（隨喜奉獻，量力而為）" },
                   { value: "onsite_lantern", label: "現場點一盞燈 $1,200" },
                 ].map(opt => (
                   <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
