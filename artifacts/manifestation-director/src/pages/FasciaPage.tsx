@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, CheckCircle, Zap, Shield, Target, Scan, Activity, FileText, Video } from "lucide-react";
 
+type BookingForm = { name: string; phone: string; lineId: string; preferred: string; notes: string };
+const initBooking: BookingForm = { name: "", phone: "", lineId: "", preferred: "", notes: "" };
+
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -63,6 +66,47 @@ const faqs = [
 
 export default function FasciaPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [booking, setBooking] = useState<BookingForm>(initBooking);
+  const [bookSubmitted, setBookSubmitted] = useState(false);
+  const [bookSubmitting, setBookSubmitting] = useState(false);
+  const [bookError, setBookError] = useState("");
+
+  const handleBooking = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBookError("");
+    if (!booking.name.trim()) { setBookError("請填寫姓名"); return; }
+    if (!booking.phone.trim()) { setBookError("請填寫手機號碼"); return; }
+    setBookSubmitting(true);
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: booking.name,
+          phone: booking.phone,
+          lineId: booking.lineId,
+          attendees: "1",
+          hasLantern: booking.preferred || "待確認",
+          referralSource: booking.notes,
+          eventName: "AI 骨架筋膜評測預約",
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "提交失敗");
+      }
+      setBookSubmitted(true);
+    } catch (err) {
+      setBookError((err as Error).message || "提交時發生錯誤，請稍後再試。");
+    } finally {
+      setBookSubmitting(false);
+    }
+  };
+
+  const scrollToBook = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById("book-form")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-[#080d1a] text-white font-sans">
@@ -92,7 +136,7 @@ export default function FasciaPage() {
                 <span className="text-[#c9a84c] font-medium">一次徹底解決，不再花冤枉錢。</span>
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="https://lin.ee/Nq1MhuY" target="_blank" rel="noopener noreferrer"
+                <a href="#book-form" onClick={scrollToBook}
                   className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-[#080d1a] font-bold rounded-full text-base transition-all">
                   立即預約 AI 檢測 →
                 </a>
@@ -378,20 +422,125 @@ export default function FasciaPage() {
         </FadeIn>
       </section>
 
-      {/* ── CTA ── */}
-      <section id="cta" className="bg-gradient-to-b from-[#0d1530] to-[#080d1a] border-t border-cyan-500/15 py-16 text-center px-6">
-        <FadeIn>
-          <p className="text-cyan-400 text-sm font-medium mb-2">酸痛問題之精準調理</p>
-          <h2 className="font-serif text-2xl md:text-3xl font-bold mb-3">一次徹底解決骨架筋膜問題</h2>
-          <p className="text-white/50 text-base mb-8 max-w-md mx-auto leading-relaxed">
-            不用再額外花冤枉錢。大幅提升按摩、診復、物理治療效果，從根源改善，真正解決。
-          </p>
-          <a href="https://lin.ee/Nq1MhuY" target="_blank" rel="noopener noreferrer"
-            className="inline-block bg-cyan-500 hover:bg-cyan-400 text-[#080d1a] font-bold px-12 py-4 rounded-full text-base transition-all mb-4">
-            加 LINE 預約 AI 檢測 →
-          </a>
-          <p className="text-white/25 text-xs">名額有限，預約後 JJ 老師將與你確認時間</p>
-        </FadeIn>
+      {/* ── 預約表單 ── */}
+      <section id="book-form" className="bg-gradient-to-b from-[#0d1530] to-[#080d1a] border-t border-cyan-500/15 py-20 px-6">
+        <div className="max-w-xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-10">
+              <p className="text-cyan-400 text-xs tracking-widest font-medium mb-2">BOOK YOUR SCAN</p>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold mb-3">預約 AI 骨架筋膜評測</h2>
+              <p className="text-white/50 text-sm leading-relaxed">留下您的資料，JJ 老師將於 24 小時內與您確認預約時間。</p>
+            </div>
+          </FadeIn>
+
+          {bookSubmitted ? (
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+              className="bg-cyan-500/10 border border-cyan-500/30 rounded-2xl p-10 text-center space-y-4">
+              <div className="text-5xl">✅</div>
+              <h3 className="font-serif text-xl font-bold text-cyan-300">預約資料已送出！</h3>
+              <p className="text-white/60 text-sm leading-relaxed">
+                感謝您的預約，JJ 老師將盡快透過電話或 LINE 與您確認時間。<br />
+                名額有限，請留意來電通知。
+              </p>
+              <a href="https://lin.ee/Nq1MhuY" target="_blank" rel="noopener noreferrer"
+                className="inline-block mt-2 text-cyan-400 text-sm underline underline-offset-4 hover:text-cyan-300">
+                也可直接加 LINE 詢問 →
+              </a>
+            </motion.div>
+          ) : (
+            <FadeIn delay={0.1}>
+              <form onSubmit={handleBooking}
+                className="bg-white/4 border border-white/10 rounded-2xl p-8 space-y-6">
+
+                {/* 姓名 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">
+                    姓名 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={booking.name}
+                    onChange={e => setBooking(b => ({ ...b, name: e.target.value }))}
+                    placeholder="請輸入您的中文全名"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                  />
+                </div>
+
+                {/* 手機 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">
+                    手機號碼 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    value={booking.phone}
+                    onChange={e => setBooking(b => ({ ...b, phone: e.target.value }))}
+                    placeholder="例：0912-345-678"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                  />
+                </div>
+
+                {/* Line ID */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">LINE ID（選填）</label>
+                  <input
+                    type="text"
+                    value={booking.lineId}
+                    onChange={e => setBooking(b => ({ ...b, lineId: e.target.value }))}
+                    placeholder="例：@example"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                  />
+                </div>
+
+                {/* 希望評測時段 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">希望預約時段（選填）</label>
+                  <select
+                    value={booking.preferred}
+                    onChange={e => setBooking(b => ({ ...b, preferred: e.target.value }))}
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm appearance-none"
+                  >
+                    <option value="" className="bg-[#0d1530]">請選擇（可不填，我們會主動聯繫）</option>
+                    <option value="平日白天" className="bg-[#0d1530]">平日白天（週一～五 09:00–17:00）</option>
+                    <option value="平日晚上" className="bg-[#0d1530]">平日晚上（週一～五 18:00 以後）</option>
+                    <option value="週末" className="bg-[#0d1530]">週末（週六、日）</option>
+                    <option value="不限時段" className="bg-[#0d1530]">不限時段，由老師安排</option>
+                  </select>
+                </div>
+
+                {/* 備註 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">補充說明（選填）</label>
+                  <textarea
+                    rows={3}
+                    value={booking.notes}
+                    onChange={e => setBooking(b => ({ ...b, notes: e.target.value }))}
+                    placeholder="例：長期腰痠、肩膀高低差問題…或其他想讓 JJ 老師提前了解的狀況"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm resize-none"
+                  />
+                </div>
+
+                {bookError && (
+                  <div className="px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                    {bookError}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={bookSubmitting}
+                  className="w-full py-4 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#080d1a] font-bold rounded-xl text-base transition-all shadow-[0_0_30px_rgba(6,182,212,0.2)]"
+                >
+                  {bookSubmitting ? "送出中⋯⋯" : "送出預約資料 →"}
+                </button>
+
+                <p className="text-center text-xs text-white/25">
+                  名額有限，預約後 JJ 老師將於 24 小時內聯繫確認。
+                </p>
+              </form>
+            </FadeIn>
+          )}
+        </div>
       </section>
 
       {/* ── FAQ ── */}
