@@ -61,7 +61,7 @@ const faqs = [
   { q: "評測是線上還是實體進行？", a: "目前為預約制實體服務，JJ 老師會以專業物理治療師角度協助你解讀報告。" },
   { q: "跟一般健身房的姿勢評估有什麼不同？", a: "AI 骨架筋膜評測結合醫療等級的影像分析，能量化偵測 5 大維度，不是主觀目測，而是有數據報告的精準評估。" },
   { q: "做完評測之後呢？", a: "你將拿到個人脊椎肌肉報告 + 居家訓練影片。有需要的話，也可以進一步討論後續調理方案。" },
-  { q: "費用是多少？", a: "請加 LINE 詢問，目前有早鳥優惠方案，名額有限。" },
+  { q: "費用是多少？", a: "線上講座學員體驗價 $500 / 人 / 次（各大醫院評測原價 $3,000）。名額有限，透過預約表單留下資料，JJ 老師將於 24 小時內確認。" },
 ];
 
 export default function FasciaPage() {
@@ -128,12 +128,12 @@ export default function FasciaPage() {
                 不該成為<br />
                 <span className="text-cyan-400">生活的常態。</span>
               </h1>
-              <p className="text-white/60 text-lg leading-relaxed mb-4">
-                很多時候，問題不在肌肉或骨骼，<br />而在於包裹全身的「筋膜」。
+              <p className="text-white/70 text-base leading-relaxed mb-4">
+                很多人的痠痛、駝背、骨盆歪斜，其實不是單純「老化」，<br />而是<span className="text-cyan-300 font-medium">骨架與筋膜失衡</span>造成的。
               </p>
               <p className="text-white/80 leading-relaxed mb-8">
-                透過 AI 智能評測，幾分鐘找出你身體真正的卡點——<br />
-                <span className="text-[#c9a84c] font-medium">一次徹底解決，不再花冤枉錢。</span>
+                透過 AI 智能脊椎肌肉評測系統，幾分鐘精準分析您的身體狀況——<br />
+                <span className="text-[#c9a84c] font-medium">從根本預防，找回健康脊椎與輕鬆體態。</span>
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="#book-form" onClick={scrollToBook}
@@ -311,7 +311,7 @@ export default function FasciaPage() {
             <p className="text-white/60 text-sm leading-relaxed mb-5">
               透過 AI 智能脊椎肌肉評測系統，只需要幾分鐘，就能精準分析您的身體狀況：
             </p>
-            <div className="space-y-3">
+            <div className="space-y-3 mb-6">
               {scanFeatures.map((f, i) => (
                 <motion.div key={f.title} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                   className="flex items-start gap-4 bg-cyan-500/6 border border-cyan-500/15 rounded-lg px-4 py-3">
@@ -322,6 +322,21 @@ export default function FasciaPage() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+            <div className="border-t border-white/8 pt-5">
+              <p className="text-white/60 text-sm mb-3">系統將產出您的專屬評測報告，並提供：</p>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { icon: "🏃", label: "居家運動建議" },
+                  { icon: "🧍", label: "姿勢調整方法" },
+                  { icon: "🦴", label: "脊椎保養方案" },
+                ].map(item => (
+                  <div key={item.label} className="text-center bg-[#c9a84c]/8 border border-[#c9a84c]/20 rounded-lg py-3 px-2">
+                    <div className="text-xl mb-1">{item.icon}</div>
+                    <p className="text-[#c9a84c] text-xs font-medium">{item.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </FadeIn>
@@ -348,6 +363,40 @@ export default function FasciaPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── 定價 ── */}
+      <section className="py-14 max-w-2xl mx-auto px-6">
+        <FadeIn>
+          <div className="relative bg-gradient-to-br from-[#0d1a30] to-[#080d1a] border border-[#c9a84c]/40 rounded-2xl overflow-hidden">
+            {/* Gold shimmer top bar */}
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
+            <div className="p-8 text-center">
+              <span className="inline-block px-3 py-1 bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-semibold rounded-full tracking-widest mb-5">
+                線上講座限定優惠
+              </span>
+              <div className="flex items-center justify-center gap-6 mb-4">
+                <div>
+                  <p className="text-white/35 text-sm line-through mb-1">各大醫院評測原價</p>
+                  <p className="text-white/40 text-3xl font-bold line-through">$3,000</p>
+                </div>
+                <div className="text-[#c9a84c]/40 text-2xl font-light">→</div>
+                <div>
+                  <p className="text-cyan-400 text-sm font-medium mb-1">講座學員體驗價</p>
+                  <p className="text-white text-5xl font-bold">
+                    $500 <span className="text-lg font-normal text-white/50">/ 人 / 次</span>
+                  </p>
+                </div>
+              </div>
+              <p className="text-white/40 text-xs mb-6">節省 $2,500・科學評估同等標準・AI 精準量化</p>
+              <a href="#book-form" onClick={scrollToBook}
+                className="inline-block bg-[#c9a84c] hover:bg-[#d4b060] text-[#080d1a] font-bold px-10 py-3.5 rounded-full text-sm transition-all shadow-[0_0_30px_rgba(201,168,76,0.2)]">
+                立即預約體驗 →
+              </a>
+              <p className="text-white/25 text-xs mt-3">名額有限，預約後 JJ 老師將確認時間</p>
+            </div>
+          </div>
+        </FadeIn>
       </section>
 
       {/* ── 為什麼不一樣：對比表格 ── */}
