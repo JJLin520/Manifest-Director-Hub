@@ -11,8 +11,9 @@ type BookingForm = {
   weight: string;
   email: string;
   bodyCondition: string;
+  referrer: string;
 };
-const initBooking: BookingForm = { name: "", gender: "", birthdate: "", phone: "", height: "", weight: "", email: "", bodyCondition: "" };
+const initBooking: BookingForm = { name: "", gender: "", birthdate: "", phone: "", height: "", weight: "", email: "", bodyCondition: "", referrer: "" };
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
@@ -87,12 +88,15 @@ export default function FasciaPage() {
     if (!booking.gender) { setBookError("請選擇性別"); return; }
     if (!booking.birthdate) { setBookError("請填寫出生年月日"); return; }
     if (!booking.phone.trim()) { setBookError("請填寫手機號碼"); return; }
+    if (!booking.height.trim()) { setBookError("請填寫身高"); return; }
+    if (!booking.weight.trim()) { setBookError("請填寫體重"); return; }
     setBookSubmitting(true);
     const extraInfo = [
       `性別：${booking.gender}`,
       `出生日期：${booking.birthdate}`,
-      booking.height ? `身高：${booking.height} cm` : null,
-      booking.weight ? `體重：${booking.weight} kg` : null,
+      `身高：${booking.height} cm`,
+      `體重：${booking.weight} kg`,
+      booking.referrer ? `介紹人：${booking.referrer}` : null,
       booking.bodyCondition ? `身體狀況：${booking.bodyCondition}` : null,
     ].filter(Boolean).join(" | ");
     try {
@@ -590,7 +594,9 @@ export default function FasciaPage() {
                 {/* 身高 / 體重 */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-white/80">身高（cm，選填）</label>
+                    <label className="block text-sm font-medium text-white/80">
+                      身高（cm）<span className="text-red-400">*</span>
+                    </label>
                     <input
                       type="number"
                       value={booking.height}
@@ -602,7 +608,9 @@ export default function FasciaPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-white/80">體重（kg，選填）</label>
+                    <label className="block text-sm font-medium text-white/80">
+                      體重（kg）<span className="text-red-400">*</span>
+                    </label>
                     <input
                       type="number"
                       value={booking.weight}
@@ -613,6 +621,18 @@ export default function FasciaPage() {
                       className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
                     />
                   </div>
+                </div>
+
+                {/* 介紹人 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">介紹人（選填）</label>
+                  <input
+                    type="text"
+                    value={booking.referrer}
+                    onChange={e => setBooking(b => ({ ...b, referrer: e.target.value }))}
+                    placeholder="例：王小明"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                  />
                 </div>
 
                 {/* Email */}
