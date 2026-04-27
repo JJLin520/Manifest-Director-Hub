@@ -90,6 +90,7 @@ export default function FasciaPage() {
     if (!booking.phone.trim()) { setBookError("請填寫手機號碼"); return; }
     if (!booking.height.trim()) { setBookError("請填寫身高"); return; }
     if (!booking.weight.trim()) { setBookError("請填寫體重"); return; }
+    if (!booking.email.trim()) { setBookError("請填寫 Email，以便寄送評測報告"); return; }
     setBookSubmitting(true);
     const extraInfo = [
       `性別：${booking.gender}`,
@@ -637,7 +638,10 @@ export default function FasciaPage() {
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-white/80">Email（選填）</label>
+                  <label className="block text-sm font-medium text-white/80">
+                    Email <span className="text-red-400">*</span>
+                    <span className="text-white/35 font-normal ml-1 text-xs">（用於寄送 AI 評測報告）</span>
+                  </label>
                   <input
                     type="email"
                     value={booking.email}
