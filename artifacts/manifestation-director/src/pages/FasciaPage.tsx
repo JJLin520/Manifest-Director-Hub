@@ -2,8 +2,17 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, CheckCircle, Zap, Shield, Target, Scan, Activity, FileText, Video } from "lucide-react";
 
-type BookingForm = { name: string; phone: string; lineId: string; preferred: string; notes: string };
-const initBooking: BookingForm = { name: "", phone: "", lineId: "", preferred: "", notes: "" };
+type BookingForm = {
+  name: string;
+  gender: string;
+  birthdate: string;
+  phone: string;
+  height: string;
+  weight: string;
+  email: string;
+  bodyCondition: string;
+};
+const initBooking: BookingForm = { name: "", gender: "", birthdate: "", phone: "", height: "", weight: "", email: "", bodyCondition: "" };
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
@@ -75,8 +84,17 @@ export default function FasciaPage() {
     e.preventDefault();
     setBookError("");
     if (!booking.name.trim()) { setBookError("請填寫姓名"); return; }
+    if (!booking.gender) { setBookError("請選擇性別"); return; }
+    if (!booking.birthdate) { setBookError("請填寫出生年月日"); return; }
     if (!booking.phone.trim()) { setBookError("請填寫手機號碼"); return; }
     setBookSubmitting(true);
+    const extraInfo = [
+      `性別：${booking.gender}`,
+      `出生日期：${booking.birthdate}`,
+      booking.height ? `身高：${booking.height} cm` : null,
+      booking.weight ? `體重：${booking.weight} kg` : null,
+      booking.bodyCondition ? `身體狀況：${booking.bodyCondition}` : null,
+    ].filter(Boolean).join(" | ");
     try {
       const res = await fetch("/api/registrations", {
         method: "POST",
@@ -84,10 +102,9 @@ export default function FasciaPage() {
         body: JSON.stringify({
           name: booking.name,
           phone: booking.phone,
-          lineId: booking.lineId,
+          email: booking.email || undefined,
           attendees: "1",
-          hasLantern: booking.preferred || "待確認",
-          referralSource: booking.notes,
+          referralSource: extraInfo,
           eventName: "AI 骨架筋膜評測預約",
         }),
       });
@@ -515,6 +532,43 @@ export default function FasciaPage() {
                   />
                 </div>
 
+                {/* 性別 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">
+                    性別 <span className="text-red-400">*</span>
+                  </label>
+                  <div className="flex gap-3">
+                    {["男", "女"].map(g => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setBooking(b => ({ ...b, gender: g }))}
+                        className={`flex-1 py-3 rounded-xl text-sm font-medium border transition-all ${
+                          booking.gender === g
+                            ? "bg-cyan-500/20 border-cyan-500/70 text-cyan-300"
+                            : "bg-white/6 border-white/15 text-white/60 hover:border-white/30 hover:text-white/80"
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 西元出生年月日 */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">
+                    西元出生年月日 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={booking.birthdate}
+                    onChange={e => setBooking(b => ({ ...b, birthdate: e.target.value }))}
+                    max={new Date().toISOString().split("T")[0]}
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm [color-scheme:dark]"
+                  />
+                </div>
+
                 {/* 手機 */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white/80">
@@ -529,42 +583,54 @@ export default function FasciaPage() {
                   />
                 </div>
 
-                {/* Line ID */}
+                {/* 身高 / 體重 */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-white/80">身高（cm，選填）</label>
+                    <input
+                      type="number"
+                      value={booking.height}
+                      onChange={e => setBooking(b => ({ ...b, height: e.target.value }))}
+                      placeholder="例：168"
+                      min={100}
+                      max={250}
+                      className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-white/80">體重（kg，選填）</label>
+                    <input
+                      type="number"
+                      value={booking.weight}
+                      onChange={e => setBooking(b => ({ ...b, weight: e.target.value }))}
+                      placeholder="例：60"
+                      min={30}
+                      max={300}
+                      className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-white/80">LINE ID（選填）</label>
+                  <label className="block text-sm font-medium text-white/80">Email（選填）</label>
                   <input
-                    type="text"
-                    value={booking.lineId}
-                    onChange={e => setBooking(b => ({ ...b, lineId: e.target.value }))}
-                    placeholder="例：@example"
+                    type="email"
+                    value={booking.email}
+                    onChange={e => setBooking(b => ({ ...b, email: e.target.value }))}
+                    placeholder="例：yourname@gmail.com"
                     className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
                   />
                 </div>
 
-                {/* 希望評測時段 */}
+                {/* 目前身體狀況說明 */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-white/80">希望預約時段（選填）</label>
-                  <select
-                    value={booking.preferred}
-                    onChange={e => setBooking(b => ({ ...b, preferred: e.target.value }))}
-                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm appearance-none"
-                  >
-                    <option value="" className="bg-[#0d1530]">請選擇（可不填，我們會主動聯繫）</option>
-                    <option value="平日白天" className="bg-[#0d1530]">平日白天（週一～五 09:00–17:00）</option>
-                    <option value="平日晚上" className="bg-[#0d1530]">平日晚上（週一～五 18:00 以後）</option>
-                    <option value="週末" className="bg-[#0d1530]">週末（週六、日）</option>
-                    <option value="不限時段" className="bg-[#0d1530]">不限時段，由老師安排</option>
-                  </select>
-                </div>
-
-                {/* 備註 */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-white/80">補充說明（選填）</label>
+                  <label className="block text-sm font-medium text-white/80">目前身體狀況說明（選填）</label>
                   <textarea
-                    rows={3}
-                    value={booking.notes}
-                    onChange={e => setBooking(b => ({ ...b, notes: e.target.value }))}
-                    placeholder="例：長期腰痠、肩膀高低差問題…或其他想讓 JJ 老師提前了解的狀況"
+                    rows={4}
+                    value={booking.bodyCondition}
+                    onChange={e => setBooking(b => ({ ...b, bodyCondition: e.target.value }))}
+                    placeholder="例：長期腰痠、肩膀高低差、骨盆歪斜…或其他想讓 JJ 老師提前了解的狀況"
                     className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm resize-none"
                   />
                 </div>
