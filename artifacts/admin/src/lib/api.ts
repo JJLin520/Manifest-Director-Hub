@@ -66,6 +66,52 @@ export const PAYMENT_COLORS: Record<string, string> = {
   refunded: "bg-slate-700/40 text-slate-300 border-slate-600/40",
 };
 
+export type SocialAccount = {
+  id: number;
+  platform: string;
+  accountName: string;
+  accountId: string;
+  accessToken: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type SocialPost = {
+  id: number;
+  content: string;
+  platforms: string; // JSON string
+  imageUrl: string | null;
+  status: string; // "draft" | "scheduled" | "sending" | "published" | "failed"
+  scheduledAt: string | null;
+  publishedAt: string | null;
+  errorMessage: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const SOCIAL_PLATFORM_LABELS: Record<string, string> = {
+  facebook: "Facebook",
+  instagram: "Instagram",
+  threads: "Threads",
+};
+
+export const SOCIAL_STATUS_LABELS: Record<string, string> = {
+  draft: "草稿",
+  scheduled: "排程中",
+  sending: "發送中",
+  published: "已發布",
+  failed: "失敗",
+};
+
+export const SOCIAL_STATUS_COLORS: Record<string, string> = {
+  draft: "bg-slate-700/40 text-slate-300 border-slate-600/40",
+  scheduled: "bg-blue-900/40 text-blue-300 border-blue-700/40",
+  sending: "bg-yellow-900/40 text-yellow-300 border-yellow-700/40",
+  published: "bg-emerald-900/40 text-emerald-300 border-emerald-700/40",
+  failed: "bg-red-900/40 text-red-300 border-red-700/40",
+};
+
 export const STAGE_COLORS: Record<string, string> = {
   registered: "bg-blue-900/40 text-blue-300 border-blue-700/40",
   contacted: "bg-purple-900/40 text-purple-300 border-purple-700/40",

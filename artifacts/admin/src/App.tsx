@@ -7,6 +7,7 @@ import Dashboard from "@/pages/Dashboard";
 import Registrations from "@/pages/Registrations";
 import Contacts from "@/pages/Contacts";
 import NumerologySessions from "@/pages/NumerologySessions";
+import SocialMedia from "@/pages/SocialMedia";
 import Layout from "@/components/Layout";
 import Login from "@/pages/Login";
 import NotFound from "@/pages/not-found";
@@ -26,6 +27,7 @@ function Router({ onLogout }: { onLogout: () => void }) {
         <Route path="/registrations" component={Registrations} />
         <Route path="/contacts" component={Contacts} />
         <Route path="/numerology" component={NumerologySessions} />
+        <Route path="/social" component={SocialMedia} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

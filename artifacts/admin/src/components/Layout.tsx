@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Users, ClipboardList, Menu, X, LogOut, Radio } from "lucide-react";
+import { LayoutDashboard, Users, ClipboardList, Menu, X, LogOut, Radio, Share2 } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/auth";
 
@@ -8,6 +8,7 @@ const nav = [
   { href: "/registrations", icon: ClipboardList, label: "報名記錄" },
   { href: "/contacts", icon: Users, label: "客戶管理" },
   { href: "/numerology", icon: Radio, label: "數字講座" },
+  { href: "/social", icon: Share2, label: "社群管理" },
 ];
 
 export default function Layout({
