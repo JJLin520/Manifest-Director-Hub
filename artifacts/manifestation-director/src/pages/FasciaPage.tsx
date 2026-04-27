@@ -451,8 +451,12 @@ export default function FasciaPage() {
             <p className="text-cyan-400 text-xs tracking-widest font-medium text-center mb-3">YOUR SPECIALIST</p>
             <h2 className="font-serif text-2xl font-bold text-center mb-10">你的身體，交給懂你的專家</h2>
             <div className="flex flex-col md:flex-row items-center gap-8 bg-white/4 border border-white/10 rounded-2xl p-8">
-              <div className="w-24 h-24 rounded-full border-2 border-cyan-500/40 bg-cyan-500/10 flex items-center justify-center shrink-0">
-                <span className="text-4xl">👨‍⚕️</span>
+              <div className="w-24 h-24 rounded-full border-2 border-cyan-500/40 overflow-hidden shrink-0">
+                <img
+                  src="/jj-photo.jpg"
+                  alt="林炳騰 JJ"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div className="flex-1">
                 <p className="text-cyan-400 text-xs tracking-widest mb-1">物理治療師 × 潛意識教練</p>

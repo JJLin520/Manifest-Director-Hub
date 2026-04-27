@@ -181,9 +181,10 @@ export default function Registrations() {
                 <th className="text-left px-4 py-3 font-medium whitespace-nowrap">姓名</th>
                 <th className="text-left px-4 py-3 font-medium whitespace-nowrap">電話</th>
                 <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Line ID</th>
+                <th className="text-left px-4 py-3 font-medium whitespace-nowrap">Email</th>
                 <th className="text-center px-4 py-3 font-medium whitespace-nowrap">人數</th>
                 <th className="text-center px-4 py-3 font-medium whitespace-nowrap">點燈</th>
-                <th className="text-left px-4 py-3 font-medium whitespace-nowrap">得知管道</th>
+                <th className="text-left px-4 py-3 font-medium whitespace-nowrap">個人資料 / 身體狀況</th>
                 <th className="text-left px-4 py-3 font-medium whitespace-nowrap">付款狀態</th>
                 <th className="text-left px-4 py-3 font-medium whitespace-nowrap">備註</th>
                 <th className="text-right px-4 py-3 font-medium whitespace-nowrap">報名日期</th>
@@ -196,6 +197,7 @@ export default function Registrations() {
                   <td className="px-4 py-3 font-medium text-foreground whitespace-nowrap">{r.contactName}</td>
                   <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{r.contactPhone}</td>
                   <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{r.contactLineId || "—"}</td>
+                  <td className="px-4 py-3 text-muted-foreground whitespace-nowrap text-xs">{r.contactEmail || "—"}</td>
                   <td className="px-4 py-3 text-center text-foreground font-medium">{r.attendees}</td>
                   <td className="px-4 py-3 text-center">
                     {r.hasLantern === "yes" ? (
@@ -204,7 +206,13 @@ export default function Registrations() {
                       <span className="text-muted-foreground">—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground whitespace-nowrap text-xs">{r.referralSource || "—"}</td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs max-w-[260px]">
+                    {r.referralSource ? (
+                      <span className="whitespace-pre-wrap break-words leading-relaxed">
+                        {r.referralSource.replace(/ \| /g, "\n")}
+                      </span>
+                    ) : "—"}
+                  </td>
                   <td className="px-4 py-3">
                     <select
                       className={`appearance-none text-xs px-2 py-1 rounded border font-medium cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary ${PAYMENT_COLORS[r.paymentStatus] || ""}`}
