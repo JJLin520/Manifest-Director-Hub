@@ -74,6 +74,12 @@ const faqs = [
   { q: "費用是多少？", a: "線上講座學員體驗價 $500 / 人 / 次（各大醫院評測原價 $3,000）。名額有限，透過預約表單留下資料，JJ 老師將於 24 小時內確認。" },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dlPush = (event: string, params?: Record<string, unknown>) => {
+  (window as any).dataLayer = (window as any).dataLayer || [];
+  (window as any).dataLayer.push({ event, ...params });
+};
+
 export default function FasciaPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [booking, setBooking] = useState<BookingForm>(initBooking);
@@ -92,6 +98,7 @@ export default function FasciaPage() {
     if (!booking.weight.trim()) { setBookError("請填寫體重"); return; }
     if (!booking.email.trim()) { setBookError("請填寫 Email，以便寄送評測報告"); return; }
     setBookSubmitting(true);
+    dlPush("fascia_form_submit", { form_name: "AI骨架筋膜評測預約" });
     const extraInfo = [
       `性別：${booking.gender}`,
       `出生日期：${booking.birthdate}`,
@@ -118,8 +125,10 @@ export default function FasciaPage() {
         throw new Error(data.error || "提交失敗");
       }
       setBookSubmitted(true);
+      dlPush("fascia_form_success", { form_name: "AI骨架筋膜評測預約" });
     } catch (err) {
       setBookError((err as Error).message || "提交時發生錯誤，請稍後再試。");
+      dlPush("fascia_form_error", { form_name: "AI骨架筋膜評測預約" });
     } finally {
       setBookSubmitting(false);
     }
@@ -127,7 +136,14 @@ export default function FasciaPage() {
 
   const scrollToBook = (e: React.MouseEvent) => {
     e.preventDefault();
+    dlPush("cta_click", { cta_label: "立即預約AI檢測", page: "fascia" });
     document.getElementById("book-form")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleFaqToggle = (i: number) => {
+    const opening = openFaq !== i;
+    setOpenFaq(opening ? i : null);
+    if (opening) dlPush("faq_open", { faq_index: i, faq_question: faqs[i].q, page: "fascia" });
   };
 
   return (
@@ -694,7 +710,7 @@ export default function FasciaPage() {
           <div className="space-y-3">
             {faqs.map((item, i) => (
               <div key={i} className="bg-white/4 border border-white/10 rounded-xl overflow-hidden">
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                <button onClick={() => handleFaqToggle(i)}
                   className="w-full flex items-center justify-between px-5 py-4 text-left">
                   <span className="text-white text-sm font-medium">{item.q}</span>
                   <ChevronDown size={15} className={`text-cyan-400 shrink-0 ml-4 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
