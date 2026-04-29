@@ -12,6 +12,8 @@ import AboutPage from "@/pages/AboutPage";
 import NumerologyPage from "@/pages/NumerologyPage";
 import NumerologyEventPage from "@/pages/NumerologyEventPage";
 import FasciaPage from "@/pages/FasciaPage";
+import BlogPage from "@/pages/BlogPage";
+import ArticlePage from "@/pages/ArticlePage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ function Router() {
           <Route path="/lecture" component={NumerologyEventPage} />
           <Route path="/fascia" component={FasciaPage} />
           <Route path="/about" component={AboutPage} />
+          <Route path="/blog/:slug" component={ArticlePage} />
+          <Route path="/blog" component={BlogPage} />
           <Route component={BrandHome} />
         </Switch>
         <Footer />

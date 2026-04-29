@@ -14,6 +14,7 @@ const links = [
   { href: "/services", label: "服務介紹" },
   { href: "/fascia", label: "AI 身體評測" },
   { href: "/events", label: "講座活動" },
+  { href: "/blog", label: "知識文章" },
   { href: "/about", label: "關於我們" },
 ];
 
