@@ -7,13 +7,14 @@ type BookingForm = {
   gender: string;
   birthdate: string;
   phone: string;
+  lineId: string;
   height: string;
   weight: string;
   email: string;
   bodyCondition: string;
   referrer: string;
 };
-const initBooking: BookingForm = { name: "", gender: "", birthdate: "", phone: "", height: "", weight: "", email: "", bodyCondition: "", referrer: "" };
+const initBooking: BookingForm = { name: "", gender: "", birthdate: "", phone: "", lineId: "", height: "", weight: "", email: "", bodyCondition: "", referrer: "" };
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
@@ -104,6 +105,7 @@ export default function FasciaPage() {
       `出生日期：${booking.birthdate}`,
       `身高：${booking.height} cm`,
       `體重：${booking.weight} kg`,
+      booking.lineId ? `LINE ID：${booking.lineId}` : null,
       booking.referrer ? `介紹人：${booking.referrer}` : null,
       booking.bodyCondition ? `身體狀況：${booking.bodyCondition}` : null,
     ].filter(Boolean).join(" | ");
@@ -604,6 +606,20 @@ export default function FasciaPage() {
                     value={booking.phone}
                     onChange={e => setBooking(b => ({ ...b, phone: e.target.value }))}
                     placeholder="例：0912-345-678"
+                    className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
+                  />
+                </div>
+
+                {/* LINE ID */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">
+                    LINE ID <span className="text-white/35 font-normal text-xs">（選填，方便約定時間）</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={booking.lineId}
+                    onChange={e => setBooking(b => ({ ...b, lineId: e.target.value }))}
+                    placeholder="例：coachJJ_lineID"
                     className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm"
                   />
                 </div>
