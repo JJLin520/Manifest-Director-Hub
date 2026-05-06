@@ -528,17 +528,47 @@ export default function FasciaPage() {
 
           {bookSubmitted ? (
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-              className="bg-cyan-500/10 border border-cyan-500/30 rounded-2xl p-10 text-center space-y-4">
-              <div className="text-5xl">✅</div>
-              <h3 className="font-serif text-xl font-bold text-cyan-300">預約資料已送出！</h3>
-              <p className="text-white/60 text-sm leading-relaxed">
-                感謝您的預約，JJ 老師將盡快透過電話或 LINE 與您確認時間。<br />
-                名額有限，請留意來電通知。
-              </p>
-              <a href="https://lin.ee/Nq1MhuY" target="_blank" rel="noopener noreferrer"
-                className="inline-block mt-2 text-cyan-400 text-sm underline underline-offset-4 hover:text-cyan-300">
-                也可直接加 LINE 詢問 →
-              </a>
+              className="bg-white/4 border border-white/10 rounded-2xl p-8 md:p-10 text-center space-y-8">
+              {/* Icon + title */}
+              <div className="space-y-3">
+                <div className="w-16 h-16 rounded-full bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center mx-auto text-3xl">✅</div>
+                <h3 className="font-serif text-2xl font-bold text-white">預約資料已送出！</h3>
+                <p className="text-white/50 text-sm">接下來，請加入 LINE 官方帳號，與 JJ 老師確認評測時間</p>
+              </div>
+
+              {/* Steps */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+                <div className="flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/25 rounded-xl px-4 py-3 flex-1 max-w-[180px]">
+                  <span className="w-6 h-6 rounded-full bg-cyan-500 text-[#080d1a] font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                  <span className="text-white/80 text-xs text-left">資料送出<br /><span className="text-cyan-400 font-medium">✓ 完成</span></span>
+                </div>
+                <div className="text-white/20 text-lg hidden sm:block">→</div>
+                <div className="flex items-center gap-2 bg-[#06C755]/10 border border-[#06C755]/30 rounded-xl px-4 py-3 flex-1 max-w-[180px]">
+                  <span className="w-6 h-6 rounded-full bg-[#06C755] text-white font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                  <span className="text-white/80 text-xs text-left">加入 LINE<br /><span className="text-[#06C755] font-medium">← 現在做這步</span></span>
+                </div>
+                <div className="text-white/20 text-lg hidden sm:block">→</div>
+                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex-1 max-w-[180px]">
+                  <span className="w-6 h-6 rounded-full bg-white/20 text-white font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                  <span className="text-white/40 text-xs text-left">確認評測<br />時間</span>
+                </div>
+              </div>
+
+              {/* LINE CTA */}
+              <div className="space-y-3">
+                <a
+                  href="https://lin.ee/8W98zyo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 w-full py-4 bg-[#06C755] hover:bg-[#05b84a] active:bg-[#04a341] text-white font-bold text-base rounded-xl transition-all shadow-[0_4px_24px_rgba(6,199,85,0.35)] hover:shadow-[0_6px_32px_rgba(6,199,85,0.5)] hover:scale-[1.02]"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <path d="M12 2C6.48 2 2 6.03 2 11c0 3.08 1.72 5.79 4.32 7.47V22l3.36-1.85c.75.21 1.53.32 2.32.32 5.52 0 10-4.03 10-9S17.52 2 12 2z"/>
+                  </svg>
+                  立即加入 LINE 官方帳號，預約評測時間
+                </a>
+                <p className="text-white/25 text-xs">加入後，直接傳訊息給 JJ 老師，即可確認評測時間</p>
+              </div>
             </motion.div>
           ) : (
             <FadeIn delay={0.1}>
