@@ -87,6 +87,7 @@ export default function FasciaPage() {
   const [bookSubmitted, setBookSubmitted] = useState(false);
   const [bookSubmitting, setBookSubmitting] = useState(false);
   const [bookError, setBookError] = useState("");
+  const [lineConfirmed, setLineConfirmed] = useState(false);
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,9 +96,11 @@ export default function FasciaPage() {
     if (!booking.gender) { setBookError("請選擇性別"); return; }
     if (!booking.birthdate) { setBookError("請填寫出生年月日"); return; }
     if (!booking.phone.trim()) { setBookError("請填寫手機號碼"); return; }
+    if (!booking.lineId.trim()) { setBookError("請填寫 LINE ID，方便確認評測時間"); return; }
     if (!booking.height.trim()) { setBookError("請填寫身高"); return; }
     if (!booking.weight.trim()) { setBookError("請填寫體重"); return; }
     if (!booking.email.trim()) { setBookError("請填寫 Email，以便寄送評測報告"); return; }
+    if (!lineConfirmed) { setBookError("請確認將加入 LINE 官方帳號以便約定時間"); return; }
     setBookSubmitting(true);
     dlPush("fascia_form_submit", { form_name: "AI骨架筋膜評測預約" });
     const extraInfo = [
@@ -643,7 +646,8 @@ export default function FasciaPage() {
                 {/* LINE ID */}
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-white/80">
-                    LINE ID <span className="text-white/35 font-normal text-xs">（選填，方便約定時間）</span>
+                    LINE ID <span className="text-red-400">*</span>
+                    <span className="text-white/35 font-normal ml-1 text-xs">（用於確認評測時間）</span>
                   </label>
                   <input
                     type="text"
@@ -724,6 +728,28 @@ export default function FasciaPage() {
                     className="w-full px-4 py-3 bg-white/6 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition text-sm resize-none"
                   />
                 </div>
+
+                {/* LINE 確認 checkbox */}
+                <label className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-all ${lineConfirmed ? "bg-[#06C755]/10 border-[#06C755]/40" : "bg-white/4 border-white/15 hover:border-white/25"}`}>
+                  <div className="relative mt-0.5 shrink-0">
+                    <input
+                      type="checkbox"
+                      checked={lineConfirmed}
+                      onChange={e => setLineConfirmed(e.target.checked)}
+                      className="sr-only"
+                    />
+                    <div className={`w-5 h-5 rounded flex items-center justify-center border-2 transition-all ${lineConfirmed ? "bg-[#06C755] border-[#06C755]" : "border-white/30 bg-white/5"}`}>
+                      {lineConfirmed && (
+                        <svg viewBox="0 0 12 10" fill="none" className="w-3 h-3">
+                          <path d="M1 5l3.5 3.5L11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-sm text-white/70 leading-relaxed">
+                    我了解送出後需<span className="text-[#06C755] font-medium">加入 LINE 官方帳號</span>，以便 JJ 老師與我確認評測時間 <span className="text-red-400">*</span>
+                  </span>
+                </label>
 
                 {bookError && (
                   <div className="px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
