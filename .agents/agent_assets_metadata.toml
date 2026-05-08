@@ -1,8 +1,0 @@
-uploads = []
-generated = []
-
-[[outputs]]
-id = "mIIMBQJvKrAJ9cGmZzppm"
-uri = "file://GTM設定指南_宇宙序能.md"
-type = "text"
-title = "GTM & GA4 完整設定指南｜宇宙序能"
