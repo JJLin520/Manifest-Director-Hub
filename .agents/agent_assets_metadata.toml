@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "rUYlT3uDYim8KNYoh_z5w"
+uri = "file://manifest-director-hub.tar.gz"
+type = "unspecified"
+title = "manifest-director-hub.tar.gz（完整專案壓縮檔）"
